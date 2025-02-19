@@ -1,0 +1,40 @@
+The following Implementations have been successfully run:
+    -HAWK
+    -MQOM
+    -PERK
+    -QR_UOV
+    -ryde
+    -SDitH
+    -SNOVA 
+    -UOV (Appears to function for AMD64 option, can't see raw rsp and req files only builtin tester results)
+    -MAYO 
+    -FAEST (Additiona Implementation could be run not Reference though)
+
+The following Implementations require linking binaries:
+    -CROSS (Successfully using Additional Implementation Version)
+    -SQIsign (Successfully run, though appears better performance requires 'assertions' to be disabled? They weren't lying it do affect the performance!)
+    -LESS (Successfully run)
+
+It appears most implementations have their own benchmarking function, need to look into standardizing it across them
+for our own testing. Most seem to track performance in CPU cycles, should look into tracking RAM usage and other 
+metrics. 
+
+Updating Algorithms to their Round 2 Variants has been somewhat difficult due to some not being publicly available:
+
+The following implementations could be upgraded to their Round 2 Variants:
+    -LESS
+    -CROSS
+    -SQIsign
+    -PERK
+    -RYDE 
+    -MAYO
+    -QRUOV
+    -SNOVA
+
+
+
+The following implementations couldn't be upgraded to their Round 2 Variants:
+    -HAWK
+    -MQoM 
+    -SDitH
+    -FAEST (Appears to be undergoing development (last commit 6 hours ago 2/19/25))
