@@ -30,11 +30,9 @@ The following implementations could be upgraded to their Round 2 Variants:
     -MAYO
     -QRUOV
     -SNOVA
-
-
+    -FAEST (Round 2 Submission found as branch)
 
 The following implementations couldn't be upgraded to their Round 2 Variants:
-    -HAWK
-    -MQoM 
-    -SDitH
-    -FAEST (Appears to be undergoing development (last commit 6 hours ago 2/19/25))
+    -HAWK (Repository not updated, submission package also not updated.)
+    -MQoM (No submission package available and repository is private)
+    -SDitH (Github Repository not updated since 2023, no submission package available)
