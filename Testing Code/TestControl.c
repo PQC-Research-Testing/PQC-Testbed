@@ -2,6 +2,11 @@
 #include <stdlib.h>
 
 int main(){
+    system("cd ..");
+    system("cd ..");
+    system("ls");
+    system("cd SQIsign/");
+    /*
     int returnCode = system("echo Hello, World!");
 
     if (returnCode == 0) {
@@ -10,7 +15,7 @@ int main(){
     else{
         printf("Failure");
     }
-
+    */
     //system("gcc -o a.out "+filename) can compile an code
     //Need to perform systme("./a.out") to execute it.
     //Make a script to go into directories and do make commands before executing maybe?

@@ -85,6 +85,9 @@ ryde1f-rijndael-main: $(RYDE_OBJS) tcith-rijndael.o $(LIB_OBJS) | xkcp folders #
 	@echo -e "\n### Compiling RYDE-1F (main) using Rijndael-based commits\n"
 	$(CC) $(C_FLAGS) $(MAIN_RYDE) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(XKCP_LINKER) -o $(BIN)/$@
 
+
+
+##end remove section
 .PHONY: ryde1f-sha3-main
 ryde1f-sha3-main: $(RYDE_OBJS) tcith-sha3.o $(LIB_OBJS) | xkcp folders ##@Build A single example using SHA3-based commits
 	@echo -e "\n### Compiling RYDE-1F (main) using SHA3-based commits\n"

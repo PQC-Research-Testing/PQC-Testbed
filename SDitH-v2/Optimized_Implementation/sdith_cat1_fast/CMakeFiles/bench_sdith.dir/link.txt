@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/bench_sdith.dir/test/bench_sdith.c.o -o bench_sdith  libvole.a lib/sha3/libsha3.a lib/aes/libaes.a -lm 

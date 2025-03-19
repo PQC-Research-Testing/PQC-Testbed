@@ -3,7 +3,6 @@
 /**
  * An example to demonstrate how to use SQIsign with the NIST API.
  */
-
 #include <inttypes.h>
 #include <mem.h>
 #include <string.h>
@@ -11,13 +10,28 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <time.h>
-
 #include <api.h>
+#include <sys/resource.h>
+#include <unistd.h>
+#include <sys/wait.h>
 #include <rng.h>
 #include <bench_test_arguments.h>
 #if defined(TARGET_BIG_ENDIAN)
 #include <tutil.h>
 #endif
+
+size_t getPeakRSS(){
+    struct rusage rusage;
+    getrusage(RUSAGE_SELF, &rusage );
+    return (size_t)(rusage.ru_maxrss * 1024L);
+}
+
+static __inline__ unsigned long GetCC(void)
+{
+  unsigned a, d; 
+  asm volatile("rdtsc" : "=a" (a), "=d" (d)); 
+  return ((unsigned long)a) | (((unsigned long)d) << 32); 
+}
 
 static uint32_t rand_u32()
 {
@@ -41,7 +55,6 @@ static uint32_t rand_u32()
 static int
 example_sqisign(void)
 {
-
     unsigned long long msglen = rand_u32() % 100;
     unsigned long long smlen = CRYPTO_BYTES + msglen;
 
@@ -49,26 +62,38 @@ example_sqisign(void)
     unsigned char *pk = calloc(CRYPTO_PUBLICKEYBYTES, 1);
 
     unsigned char *sm = calloc(smlen, 1);
-
+    int res = 0;
+    unsigned char temp;
     unsigned char msg[msglen], msg2[msglen];
+    unsigned long before, after;
+    unsigned long rss_peak;
 
     printf("Example with %s\n", CRYPTO_ALGNAME);
-
+    before = GetCC();
+    res = crypto_sign_keypair(pk, sk);
+    after = GetCC();
+    printf("Cycles: %lu\n",(after-before)/1000000);
     printf("crypto_sign_keypair -> ");
-    int res = crypto_sign_keypair(pk, sk);
     if (res) {
         printf("FAIL\n");
         goto err;
-    } else {
+    }else {
         printf("OK\n");
     }
-
     // choose a random message
-    for (size_t i = 0; i < msglen; ++i)
-        msg[i] = rand_u32();
+    for (size_t i = 0; i < msglen; ++i){
+        //temp = rand_u32();   
+        temp = 1;
+        msg[i] = temp;
+        msg2[i] = temp;
+    }
 
-    printf("crypto_sign -> ");
+    before = GetCC();
     res = crypto_sign(sm, &smlen, msg, msglen, sk);
+    after = GetCC();
+
+    printf("Cycles: %lu\n",(after-before)/1000000);
+    printf("crypto_sign -> ");
     if (res) {
         printf("FAIL\n");
         goto err;
@@ -76,45 +101,20 @@ example_sqisign(void)
         printf("OK\n");
     }
 
-    printf("crypto_sign_open (with correct signature) -> ");
+    before = GetCC();
     res = crypto_sign_open(msg2, &msglen, sm, smlen, pk);
+    after = GetCC();
+
+    printf("Cycles: %lu\n",(after-before)/1000000);
+    printf("crypto_sign_open (with correct signature) -> ");
     if (res || msglen != sizeof(msg) || memcmp(msg, msg2, msglen)) {
         printf("FAIL\n"); // signature was not accepted!?
         goto err;
     } else {
         printf("OK\n");
     }
-
-
-    // fill with random bytes
-    for (size_t i = 0; i < msglen; ++i)
-        msg2[i] = rand_u32();
-
-    // let's try a single bit flip
-    size_t pos = rand_u32() % smlen;
-    sm[pos / 8] ^= 1 << pos % 8;
-
-    res = crypto_sign_open(msg2, &msglen, sm, smlen, pk);
-
-    printf("crypto_sign_open (with altered signature) -> ");
-    if (!res) {
-        printf("FAIL\n"); // signature was accepted anyway!?
-        res = -1;
-        goto err;
-    }
-    else {
-        printf("OK\n");
-        res = 0;
-
-        if (msglen)
-            printf("WARNING: verification failed but the message length was returned nonzero; misuse-prone API\n");
-
-        unsigned char any = 0;
-        for (size_t i = 0; i < msglen; ++i)
-            any |= msg2[i];
-        if (any)
-            printf("WARNING: verification failed but the message buffer was not zeroed out; misuse-prone API\n");
-    }
+    rss_peak = getPeakRSS();
+    printf("Peak RSS Usage: %ld KB\n",rss_peak/1000);
 
 err:
     sqisign_secure_free(sk, CRYPTO_SECRETKEYBYTES);

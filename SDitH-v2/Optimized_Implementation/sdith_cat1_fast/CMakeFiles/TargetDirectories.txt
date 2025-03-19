@@ -1,0 +1,17 @@
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/CMakeFiles/vole.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/CMakeFiles/bench_sdith.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/CMakeFiles/test.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/CMakeFiles/edit_cache.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/CMakeFiles/rebuild_cache.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/sha3/CMakeFiles/sha3.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/sha3/CMakeFiles/test.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/sha3/CMakeFiles/edit_cache.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/sha3/CMakeFiles/rebuild_cache.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/aes/CMakeFiles/aes.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/aes/CMakeFiles/test.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/aes/CMakeFiles/edit_cache.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/aes/CMakeFiles/rebuild_cache.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/generator/CMakeFiles/PQCGenKat_sign.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/generator/CMakeFiles/test.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/generator/CMakeFiles/edit_cache.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/generator/CMakeFiles/rebuild_cache.dir

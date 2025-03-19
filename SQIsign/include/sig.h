@@ -4,7 +4,7 @@
 #define SQISIGN_H
 
 #include <stdint.h>
-#include <sqisign_namespace.h>
+#include "sqisign_namespace.h"
 
 #if defined(ENABLE_SIGN)
 /**

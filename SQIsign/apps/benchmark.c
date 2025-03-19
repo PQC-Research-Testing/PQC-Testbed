@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: Apache-2.0
-
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -37,7 +36,7 @@ bench(size_t runs)
     unsigned long long len;
 
     printf("%s (%zu iterations)\n", CRYPTO_ALGNAME, runs);
-
+    
     BENCH_CODE_1(runs);
     crypto_sign_keypair(pk[i], sk[i]);
     BENCH_CODE_2("keypair");

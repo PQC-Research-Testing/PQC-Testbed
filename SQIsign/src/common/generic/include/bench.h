@@ -97,7 +97,7 @@ _TRUNC(uint64_t x)
         uint64_t cycles, cycles1, cycles2;                                                         \
         uint64_t cycles_list[count];                                                               \
         cycles = 0;                                                                                \
-        for (size_t i = 0; i < count; ++i) {                                                       \
+        for (size_t i = 0; i < count; ++i) {                                                 \
             cycles1 = cpucycles();
 
 #define BENCH_CODE_2(name)                                                                         \

@@ -158,7 +158,7 @@ test: init info build/rng.o build/snova.o build/ct_functions.o $(STATICLIB)
 	./test.a > test_$(CRYPTO_ALGNAME)_OPT_$(OPTIMISATION).log
 
 test_api: init info build/sign.o build/ct_functions.o $(STATICLIB)
-	$(CC) $(CFLAGS) $(SNOVA_PARAMS) $(OLIST) build/rng.o test/test_api.c build/sign.o -o test_api.a $(LIBS)
+	$(CC) -std=c11 $(CFLAGS) $(SNOVA_PARAMS) $(OLIST) build/rng.o test/test_api.c build/sign.o -o test_api.a $(LIBS)
 	./test_api.a > test_api_$(CRYPTO_ALGNAME)_$(SK_TYPE)_OPT_$(OPTIMISATION).log
 
 test_speed: init info build/rng.o build/snova.o build/ct_functions.o $(STATICLIB)

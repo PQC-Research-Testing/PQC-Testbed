@@ -19,20 +19,54 @@ It appears most implementations have their own benchmarking function, need to lo
 for our own testing. Most seem to track performance in CPU cycles, should look into tracking RAM usage and other 
 metrics. 
 
-Updating Algorithms to their Round 2 Variants has been somewhat difficult due to some not being publicly available:
+All implementations have been upgraded to their round 2 variant.
 
-The following implementations could be upgraded to their Round 2 Variants:
-    -LESS
-    -CROSS
-    -SQIsign
-    -PERK
-    -RYDE 
-    -MAYO
-    -QRUOV
-    -SNOVA
-    -FAEST (Round 2 Submission found as branch)
+Testing Automation Progress:
+    -Usage of Bash scripts to compile all builds.
+    -Researching detection of files being made to allow for re-running (could make clean files first though).
+    -Source modifier used to run script in source-shell instead of sub-shell needed for tranversing repository.
 
-The following implementations couldn't be upgraded to their Round 2 Variants:
-    -HAWK (Repository not updated, submission package also not updated.)
-    -MQoM (No submission package available and repository is private)
-    -SDitH (Github Repository not updated since 2023, no submission package available)
+SQIsign Automation Performance Testing:
+    -Research into build options to ensure proper build tested.
+    -NIST API may allow for easier time measuring performance, more research needed.
+    -SQIsign will be developed first to deal with any issues arising from automation.
+    -Issues with include headers not being found, looking into VScode settings to fix it by notifying system of directory with headers to be included.
+    -Need to perform research on enviornment developers have for the code. .vscode file may have settings that allow for header files to work properly.
+
+Metrics to be Tracked:
+    -CPU cycles (Tracking handled using RDTSC function)
+    -RAM usage (Potential implementation using LESS' memory benchmarking function)
+    -Runtime (done using standard timing operations)
+Metrics Considered for Tracking:
+    -Stack Usage
+    -Code Size
+    -Peak Residental Memory usage (Can be tracked using rusage, difficulty with tracking RAM usage for specific functions)
+
+Measure against algorithsm:
+    -RSA 2048 key length (OpenSSL)
+    -ECDSA P521 (OpenSSL)
+    -Dilithium (liboqs)
+    -Falcon (liboqs)
+    -Sphinx (liboqs)
+
+SQIsign NISTapi Guide:
+    -Run the following instructions:
+        $ mkdir -p build
+        $ cd build
+        $ cmake -DSQISIGN_BUILD_TYPE=ref ..
+    -cd into apps directory
+    -run make command
+
+
+Current Goals:
+    -Create makefiles that when called will link and build executables for each implementation and run the Benchmarkingcode.c code to get data.
+    -Minimize editing of existing makefiles if possible.
+    -Have data gathered by running program stored in a textfile for later usage as input for Matplotlib to create graphs.
+    -Create a bash script to make and run each implementation's executable a number of times (Random function varies public and private key across runs).
+
+Current Progress:
+    -SQIsign and RYDE have working implementations for tracking performance.
+    -Currently working on PERK implementation. 
+    -Makefiles should be moved to Testing Code directory. Use a name other than makefile to allow for multiple files to be in same directory.
+    -Difficulty with making performance tracking for SDitH due to makefile organization
+
