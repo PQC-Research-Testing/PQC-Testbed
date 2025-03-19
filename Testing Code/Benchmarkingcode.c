@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <time.h>
+#include <sys/time.h>
 #include <api.h>
 #include <sys/resource.h>
 #include <unistd.h>
@@ -47,8 +48,8 @@ main()
 
     unsigned char *sk = calloc(CRYPTO_SECRETKEYBYTES, 1);
     unsigned char *pk = calloc(CRYPTO_PUBLICKEYBYTES, 1);
-    clock_t start;
-    int timeElapsed = 0;
+    struct timeval st, et;
+    unsigned long timeElapsed;
     unsigned char *sm = calloc(smlen, 1);
     int res = 0;
     unsigned char temp;
@@ -59,30 +60,39 @@ main()
     //print statements used to ensure data being gathered. To be removed and replaced with logging in a file.
     //focus on getting everything working first. 
     printf("Example with %s\n", CRYPTO_ALGNAME);
-    start = clock();
+    gettimeofday(&st, NULL);
     before = GetCC();
     //consider adding mechanism to track elapsed time of GetCC() function to remove it from api function runtime.
     res = crypto_sign_keypair(pk, sk);
     after = GetCC();
-    timeElapsed = (clock()-start)*1000 / CLOCKS_PER_SEC; //measures runtime in milliseconds. Consider different unit of measurement.
+    gettimeofday(&et, NULL);
+    timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
+    printf("Time elapsed: %lu microseconds\n", timeElapsed);
     // choose a random message
     for (size_t i = 0; i < msglen; ++i){
         temp = rand_u32(); //consider making message non-random later.
         msg[i] = temp;
     }
 
+    gettimeofday(&st, NULL);
     before = GetCC();
     res = crypto_sign(sm, &smlen, msg, msglen, sk);
     after = GetCC();
-
+    gettimeofday(&et, NULL);
+    timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
+    printf("Time elapsed: %lu microseconds\n", timeElapsed);
 
+    gettimeofday(&st, NULL);
     before = GetCC();
     res = crypto_sign_open(msg2, &msglen, sm, smlen, pk);
     after = GetCC();
-
+    gettimeofday(&et, NULL);
+    timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
+    printf("Time elapsed: %lu microseconds\n", timeElapsed);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
+
     rss_peak = getPeakRSS();
     printf("Peak RSS Usage: %ld KB\n",rss_peak/1000);
 
