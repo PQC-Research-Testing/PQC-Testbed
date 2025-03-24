@@ -6,28 +6,30 @@
 #include <time.h>
 #include <sys/time.h>
 #include <api.h>
+#include <parameters.h>
 #include <sys/resource.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <randombytes.h>
+#include <rng.h>
 #if defined(TARGET_BIG_ENDIAN)
 #include <tutil.h>
 #endif
 
-size_t getPeakRSS(){
+static __inline__ unsigned long GetCC(void)
+{
+  unsigned a, d; 
+  asm ("rdtsc" : "=a" (a), "=d" (d)); 
+  return ((unsigned long)a) | (((unsigned long)d) << 32); 
+}
+
+size_t getPeakRSS(void);
+size_t getPeakRSS(void){
     struct rusage rusage;
     getrusage(RUSAGE_SELF, &rusage );
     return (size_t)(rusage.ru_maxrss * 1024L);
 }
 
-static __inline__ unsigned long GetCC(void)
-{
-  unsigned a, d; 
-  asm volatile("rdtsc" : "=a" (a), "=d" (d)); 
-  return ((unsigned long)a) | (((unsigned long)d) << 32); 
-}
-
-static uint32_t rand_u32()
+static uint32_t rand_u32(void)
 {
     unsigned char buf[4];
     if (randombytes(buf, sizeof(buf)))
@@ -39,11 +41,11 @@ static uint32_t rand_u32()
 }
 
 int
-main()
+main(void)
 {
     unsigned char seed[48] = {0};
     randombytes_init(seed, NULL, 256);
-    unsigned long long msglen = rand_u32() % 100;
+    unsigned long long msglen = 100;
     unsigned long long smlen = CRYPTO_BYTES + msglen;
 
     unsigned char *sk = calloc(CRYPTO_SECRETKEYBYTES, 1);
@@ -70,7 +72,7 @@ main()
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
     printf("Time elapsed: %lu microseconds\n", timeElapsed);
     // choose a random message
-    for (size_t i = 0; i < msglen; ++i){
+    for (size_t i = 0; i < msglen; i++){
         temp = rand_u32(); //consider making message non-random later.
         msg[i] = temp;
     }
@@ -90,8 +92,8 @@ main()
     after = GetCC();
     gettimeofday(&et, NULL);
     timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
-    printf("Time elapsed: %lu microseconds\n", timeElapsed);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
+    printf("Time elapsed: %lu microseconds\n", timeElapsed);
 
     rss_peak = getPeakRSS();
     printf("Peak RSS Usage: %ld KB\n",rss_peak/1000);

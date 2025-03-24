@@ -6,35 +6,35 @@ CC=gcc
 C_FLAGS:=-O3 -flto -Wall -Wextra -Wno-unused-function -mpclmul -msse2 -mavx -mavx2 -maes -DOPT_AVX
 C_FLAGS_VERBOSE:=-O3 -flto -Wall -Wextra -Wno-unused-function -mpclmul -msse2 -mavx -mavx2 -maes -DOPT_AVX -DVERBOSE
 
-RANDOMBYTES_SRC:=../ryde/Optimized_Implementation/ryde1f/lib/randombytes/randombytes.c
-RANDOMBYTES_INCLUDE:=-I ../ryde/Optimized_Implementation/ryde1f/lib/randombytes -lcrypto
+RANDOMBYTES_SRC:=../ryde/Optimized_Implementation/ryde5s/lib/randombytes/randombytes.c
+RANDOMBYTES_INCLUDE:=-I ../ryde/Optimized_Implementation/ryde5s/lib/randombytes -lcrypto
 
-XKCP_SRC:=../ryde/Optimized_Implementation/ryde1f/lib/XKCP
+XKCP_SRC:=../ryde/Optimized_Implementation/ryde5s/lib/XKCP
 XKCP_SRC_SIMPLE:=$(XKCP_SRC)/SimpleFIPS202.c
 XKCP_INCLUDE:=-I$(XKCP_SRC) -I$(XKCP_SRC)/avx2
 XKCP_INCLUDE_SIMPLE:=-I $(XKCP_SRC)
 XKCP_LINKER:=-L$(XKCP_SRC) -lshake
 
-WRAPPER_SRC:=../ryde/Optimized_Implementation/ryde1f/src/wrapper
+WRAPPER_SRC:=../ryde/Optimized_Implementation/ryde5s/src/wrapper
 WRAPPER_INCLUDE:=-I $(WRAPPER_SRC)
 
-RBC_SRC:=../ryde/Optimized_Implementation/ryde1f/src/rbc-53
+RBC_SRC:=../ryde/Optimized_Implementation/ryde5s/src/rbc-67
 RBC_INCLUDE:=-I $(RBC_SRC)
 
-SRC:=../ryde/Optimized_Implementation/ryde1f/src
-INCLUDE:=-I ../ryde/Optimized_Implementation/ryde1f/src $(RBC_INCLUDE) $(WRAPPER_INCLUDE) $(XKCP_INCLUDE) $(RANDOMBYTES_INCLUDE)
+SRC:=../ryde/Optimized_Implementation/ryde5s/src
+INCLUDE:=-I ../ryde/Optimized_Implementation/ryde5s/src $(RBC_INCLUDE) $(WRAPPER_INCLUDE) $(XKCP_INCLUDE) $(RANDOMBYTES_INCLUDE)
 
-MAIN_RYDE:=ryde/Optimized_Implementation/ryde1f/src/main.c
-BENCH_TEST=../Testing\ Code/Benchmarkingcode.c ##change this to location in 
-BENCH_RYDE:=../ryde/Optimized_Implementation/ryde1f/src/bench.c
-KAT_RYDE:=../ryde/Optimized_Implementation/ryde1f/src/PQCgenKAT_sign.c
+MAIN_RYDE:=../ryde/Optimized_Implementation/ryde5s/src/main.c
+BENCH_RYDE:=../ryde/Optimized_Implementation/ryde5s/src/bench.c
+KAT_RYDE:=../ryde/Optimized_Implementation/ryde5s/src/PQCgenKAT_sign.c
+BENCH_TEST:=../TestingCode/Benchmarkingcode.c
 
-RYDE_OBJS:=rbc_53_elt.o rbc_53_vec.o rbc_53_vspace.o rbc_53_mat.o rbc_53_mat_fq.o keypair.o signature.o verification.o parsing.o ggm_tree.o sign.o
-RYDE_OBJS_VERBOSE:=rbc_53_elt.o rbc_53_vec.o rbc_53_vspace.o rbc_53_mat.o rbc_53_mat_fq.o keypair-verbose.o signature-verbose.o verification-verbose.o parsing.o ggm_tree.o sign.o
+RYDE_OBJS:=rbc_67_elt.o rbc_67_vec.o rbc_67_vspace.o rbc_67_mat.o rbc_67_mat_fq.o keypair.o signature.o verification.o parsing.o ggm_tree.o sign.o
+RYDE_OBJS_VERBOSE:=rbc_67_elt.o rbc_67_vec.o rbc_67_vspace.o rbc_67_mat.o rbc_67_mat_fq.o keypair-verbose.o signature-verbose.o verification-verbose.o parsing.o ggm_tree.o sign.o
 LIB_OBJS:=SimpleFIPS202.o randombytes.o
 
-BUILD:=../ryde/Optimized_Implementation/ryde1f/bin/build
-BIN:=../ryde/Optimized_Implementation/ryde1f/bin
+BUILD:=../ryde/Optimized_Implementation/ryde5s/bin/build
+BIN:=../ryde/Optimized_Implementation/ryde5s/bin
 
 
 
@@ -64,7 +64,7 @@ rbc_%.o: $(RBC_SRC)/rbc_%.c | folders
 	@echo -e "\n### Compiling $@\n"
 	$(CC) $(C_FLAGS) -c $< $(INCLUDE) -o $(BUILD)/$@
 
- %-verbose.o: $(SRC)/%.c | folders
+%-verbose.o: $(SRC)/%.c | folders
 	@echo -e "\n### Compiling $@ (verbose mode)\n"
 	$(CC) $(C_FLAGS_VERBOSE) -c $< $(INCLUDE) -o $(BUILD)/$@
 
@@ -77,8 +77,7 @@ tcith-sha3.o: $(SRC)/tcith.c | folders
 	@echo -e "\n### Compiling $@\n"
 	$(CC) $(C_FLAGS) -D_SHA3_ -c $< $(INCLUDE) -o $(BUILD)/$@
 
-.PHONY: ryde1f-bench
-ryde1f-bench: $(RYDE_OBJS) tcith-rijndael.o $(LIB_OBJS) | xkcp folders ##@Build A single example using Rijndael-based commits
-	@echo -e "\n### Compiling RYDE-1F (main) using Rijndael-based commits\n"
+.PHONY: ryde5s-bench
+ryde5s-bench: $(RYDE_OBJS) tcith-rijndael.o $(LIB_OBJS) | xkcp folders ##@Build A single example using Rijndael-based commits
+	@echo -e "\n### Compiling RYDE-5S (main) using Rijndael-based commits\n"
 	$(CC) $(C_FLAGS) $(BENCH_TEST) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(XKCP_LINKER) -o $(BIN)/$@
-
