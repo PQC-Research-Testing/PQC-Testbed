@@ -9,25 +9,27 @@
 #include <sys/resource.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <randombytes.h>
+//path specified due to issue with linking rng in a similar way to api.
+#include "../MQOM/Optimized_Implementation_AVX2/mqom2_cat1_gf2_fast_r3/generator/rng.h"
 #if defined(TARGET_BIG_ENDIAN)
 #include <tutil.h>
 #endif
 
-size_t getPeakRSS(){
+static __inline__ unsigned long GetCC(void)
+{
+  unsigned a, d; 
+  asm ("rdtsc" : "=a" (a), "=d" (d)); 
+  return ((unsigned long)a) | (((unsigned long)d) << 32); 
+}
+
+size_t getPeakRSS(void);
+size_t getPeakRSS(void){
     struct rusage rusage;
     getrusage(RUSAGE_SELF, &rusage );
     return (size_t)(rusage.ru_maxrss * 1024L);
 }
 
-static __inline__ unsigned long GetCC(void)
-{
-  unsigned a, d; 
-  asm volatile("rdtsc" : "=a" (a), "=d" (d)); 
-  return ((unsigned long)a) | (((unsigned long)d) << 32); 
-}
-
-static uint32_t rand_u32()
+static uint32_t rand_u32(void)
 {
     unsigned char buf[4];
     if (randombytes(buf, sizeof(buf)))
@@ -39,7 +41,7 @@ static uint32_t rand_u32()
 }
 
 int
-main()
+main(void)
 {
     unsigned char seed[48] = {0};
     randombytes_init(seed, NULL, 256);
@@ -57,9 +59,12 @@ main()
     unsigned long before, after;
     unsigned long rss_peak;
 
-    printf("Bench with %s\n", CRYPTO_ALGNAME);
+    //print statements used to ensure data being gathered. To be removed and replaced with logging in a file.
+    //focus on getting everything working first. 
+    printf("Example with %s\n", CRYPTO_ALGNAME);
     gettimeofday(&st, NULL);
     before = GetCC();
+    //consider adding mechanism to track elapsed time of GetCC() function to remove it from api function runtime.
     res = crypto_sign_keypair(pk, sk);
     after = GetCC();
     gettimeofday(&et, NULL);
