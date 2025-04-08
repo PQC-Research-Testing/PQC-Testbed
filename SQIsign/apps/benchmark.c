@@ -1,123 +1,102 @@
-// SPDX-License-Identifier: Apache-2.0
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 #include <inttypes.h>
-
-#include <api.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <time.h>
+#include <sys/time.h>
+#include "api.h"
+#include <sys/resource.h>
+#include <unistd.h>
+#include <sys/wait.h>
 #include <rng.h>
-#include <bench.h>
-#include <bench_test_arguments.h>
 #if defined(TARGET_BIG_ENDIAN)
 #include <tutil.h>
 #endif
 
-void
-bench(size_t runs)
+static __inline__ unsigned long GetCC(void)
 {
-    const size_t m_len = 32;
-    const size_t sm_len = CRYPTO_BYTES + m_len;
-
-    unsigned char *pkbuf = calloc(runs, CRYPTO_PUBLICKEYBYTES);
-    unsigned char *skbuf = calloc(runs, CRYPTO_SECRETKEYBYTES);
-    unsigned char *smbuf = calloc(runs, sm_len);
-    unsigned char *mbuf = calloc(runs, m_len);
-
-    unsigned char *pk[runs], *sk[runs], *sm[runs], *m[runs];
-    for (size_t i = 0; i < runs; ++i) {
-        pk[i] = pkbuf + i * CRYPTO_PUBLICKEYBYTES;
-        sk[i] = skbuf + i * CRYPTO_SECRETKEYBYTES;
-        sm[i] = smbuf + i * sm_len;
-        m[i] = mbuf + i * m_len;
-        if (randombytes(m[i], m_len))
-            abort();
-    }
-
-    unsigned long long len;
-
-    printf("%s (%zu iterations)\n", CRYPTO_ALGNAME, runs);
-    
-    BENCH_CODE_1(runs);
-    crypto_sign_keypair(pk[i], sk[i]);
-    BENCH_CODE_2("keypair");
-
-    BENCH_CODE_1(runs);
-    len = sm_len;
-    crypto_sign(sm[i], &len, m[i], m_len, sk[i]);
-    if (len != sm_len)
-        abort();
-    BENCH_CODE_2("sign");
-
-    int ret;
-    BENCH_CODE_1(runs);
-    len = m_len;
-    ret = crypto_sign_open(m[i], &len, sm[i], sm_len, pk[i]);
-    if (ret)
-        abort();
-    BENCH_CODE_2("verify");
-
-    free(pkbuf);
-    free(skbuf);
-    free(smbuf);
-    free(mbuf);
+  unsigned a, d; 
+  asm ("rdtsc" : "=a" (a), "=d" (d)); 
+  return ((unsigned long)a) | (((unsigned long)d) << 32); 
 }
 
+size_t getPeakRSS(void);
+size_t getPeakRSS(void){
+    struct rusage rusage;
+    getrusage(RUSAGE_SELF, &rusage );
+    return (size_t)(rusage.ru_maxrss * 1024L);
+}
+
+
 int
-main(int argc, char *argv[])
+main(void)
 {
-    uint32_t seed[12] = { 0 };
-    int iterations = SQISIGN_TEST_REPS;
-    int help = 0;
-    int seed_set = 0;
+    unsigned char seed[48] = {0};
+    randombytes_init(seed, NULL, 256);
+    unsigned long long msglen = 100;
+    unsigned long long smlen = CRYPTO_BYTES + msglen;
 
-#ifndef NDEBUG
-    fprintf(stderr,
-            "\x1b[31mIt looks like SQIsign was compiled with assertions enabled.\n"
-            "This will severely impact performance measurements.\x1b[0m\n");
-#endif
+    unsigned char *sk = calloc(CRYPTO_SECRETKEYBYTES, 1);
+    unsigned char *pk = calloc(CRYPTO_PUBLICKEYBYTES, 1);
+    struct timeval st, et;
+    unsigned long timeElapsed;
+    unsigned char *sm = calloc(smlen, 1);
+    int res = 0;
+    unsigned char msg[msglen], msg2[msglen];
+    unsigned long before, after;
+    unsigned long rss_peak;
 
-    for (int i = 1; i < argc; i++) {
-        if (!help && strcmp(argv[i], "--help") == 0) {
-            help = 1;
-            continue;
-        }
-
-        if (!seed_set && !parse_seed(argv[i], seed)) {
-            seed_set = 1;
-            continue;
-        }
-
-        if (sscanf(argv[i], "--iterations=%d", &iterations) == 1) {
-            continue;
+    //file for storing runtime data
+    FILE *file = fopen(CRYPTO_ALGNAME, "a");
+    if(file){
+        fseek(file, 0, SEEK_END);
+        long size = ftell(file);
+        if(size==0){
+            fprintf(file, "Keygen CC,Keygen Time (Microseconds), Signature CC,Signature Time (Microseconds),Verification CC,Verification Time (Microseconds),PEAK RSS (KB)\n");
         }
     }
 
-    if (help || iterations <= 0) {
-        printf("Usage: %s [--iterations=<iterations>] [--seed=<seed>]\n", argv[0]);
-        printf("Where <iterations> is the number of iterations used for benchmarking; if not "
-               "present, uses the default: %d)\n",
-               iterations);
-        printf("Where <seed> is the random seed to be used; if not present, a random seed is "
-               "generated\n");
-        return 1;
+    printf("Bench with %s\n", CRYPTO_ALGNAME);
+    gettimeofday(&st, NULL);
+    before = GetCC();
+    //consider adding mechanism to track elapsed time of GetCC() function to remove it from api function runtime.
+    res = crypto_sign_keypair(pk, sk);
+    after = GetCC();
+    gettimeofday(&et, NULL);
+    timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
+    printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
+    printf("Time elapsed: %lu microseconds\n", timeElapsed);
+    fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
+    // choose a random message
+    for (size_t i = 0; i < msglen; i++){
+        msg[i] = 1;
     }
 
-    if (!seed_set) {
-        randombytes_select((unsigned char *)seed, sizeof(seed));
-    }
+    gettimeofday(&st, NULL);
+    before = GetCC();
+    res = crypto_sign(sm, &smlen, msg, msglen, sk);
+    after = GetCC();
+    gettimeofday(&et, NULL);
+    timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
+    printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
+    printf("Time elapsed: %lu microseconds\n", timeElapsed);
+    fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
 
-    print_seed(seed);
+    gettimeofday(&st, NULL);
+    before = GetCC();
+    res = crypto_sign_open(msg2, &msglen, sm, smlen, pk);
+    after = GetCC();
+    gettimeofday(&et, NULL);
+    timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
+    printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
+    printf("Time elapsed: %lu microseconds\n", timeElapsed);
+    fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
 
-#if defined(TARGET_BIG_ENDIAN)
-    for (int i = 0; i < 12; i++) {
-        seed[i] = BSWAP32(seed[i]);
-    }
-#endif
+    rss_peak = getPeakRSS();
+    printf("Peak RSS Usage: %ld KB\n",rss_peak/1000);
+    fprintf(file, "%ld\n", rss_peak/1000);
+    fclose(file);
 
-    randombytes_init((unsigned char *)seed, NULL, 256);
-    cpucycles_init();
-
-    bench(iterations);
-
-    return 0;
+    return res;
 }

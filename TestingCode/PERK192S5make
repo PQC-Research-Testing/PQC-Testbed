@@ -6,10 +6,10 @@ LDFLAGS:= -lcrypto -lgmp
 ADDITIONAL_CFLAGS:= -Wno-missing-prototypes -Wno-sign-compare -Wno-unused-but-set-variable -Wno-unused-parameter
 
 # Directories
-BUILD_DIR:=../perk/Optimized_Implementation/perk-192-short-3/build
+BUILD_DIR:=../perk/Optimized_Implementation/perk-192-short-5/build
 BIN_DIR:=$(BUILD_DIR)/bin
-LIB_DIR:=../perk/Optimized_Implementation/perk-192-short-3/lib
-SRC_DIR:=../perk/Optimized_Implementation/perk-192-short-3/src
+LIB_DIR:=../perk/Optimized_Implementation/perk-192-short-5/lib
+SRC_DIR:=../perk/Optimized_Implementation/perk-192-short-5/src
 
 # main files and executables
 MAIN_PERK_SRC:=$(SRC_DIR)/main.c

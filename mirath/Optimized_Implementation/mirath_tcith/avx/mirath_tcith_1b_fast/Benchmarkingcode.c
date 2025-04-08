@@ -57,19 +57,30 @@ main()
     unsigned long before, after;
     unsigned long rss_peak;
 
+    //file for storing runtime data
+    FILE *file = fopen(CRYPTO_ALGNAME, "a");
+    if(file){
+        fseek(file, 0, SEEK_END);
+        long size = ftell(file);
+        if(size==0){
+            fprintf(file, "Keygen CC,Keygen Time (Microseconds), Signature CC,Signature Time (Microseconds),Verification CC,Verification Time (Microseconds),PEAK RSS (KB)\n");
+        }
+    }
+
     printf("Bench with %s\n", CRYPTO_ALGNAME);
     gettimeofday(&st, NULL);
     before = GetCC();
+    //consider adding mechanism to track elapsed time of GetCC() function to remove it from api function runtime.
     res = crypto_sign_keypair(pk, sk);
     after = GetCC();
     gettimeofday(&et, NULL);
     timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
     printf("Time elapsed: %lu microseconds\n", timeElapsed);
+    fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
     // choose a random message
     for (size_t i = 0; i < msglen; i++){
-        temp = rand_u32(); //consider making message non-random later.
-        msg[i] = temp;
+        msg[i] = 1;
     }
 
     gettimeofday(&st, NULL);
@@ -80,6 +91,7 @@ main()
     timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
     printf("Time elapsed: %lu microseconds\n", timeElapsed);
+    fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
 
     gettimeofday(&st, NULL);
     before = GetCC();
@@ -89,9 +101,12 @@ main()
     timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
     printf("Time elapsed: %lu microseconds\n", timeElapsed);
+    fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
 
     rss_peak = getPeakRSS();
     printf("Peak RSS Usage: %ld KB\n",rss_peak/1000);
+    fprintf(file, "%ld\n", rss_peak/1000);
+    fclose(file);
 
     return res;
 }

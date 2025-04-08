@@ -52,9 +52,15 @@ run: PQCgenKAT_sign
 .PHONY: clean
 
 clean:
+	rm -f $(MIRATH)/*.o $(MIRATH)/*.su
+	rm -f $(MIRATH)/common/*.o
+	rm -f $(MIRATH)/mirath_1a_f
+	rm -f $(MIRATH)/PQCgenKAT_sign
+	rm -f $(MIRATH)/PQCsignKAT_*.req
+	rm -f $(MIRATH)/PQCsignKAT_*.rsp
 	rm -f *.o *.su
 	rm -f common/*.o
-	rm -f mirath_1a_f
+	rm -f mirath_1a_s
 	rm -f PQCgenKAT_sign
 	rm -f PQCsignKAT_*.req
 	rm -f PQCsignKAT_*.rsp

@@ -1,0 +1,29 @@
+CC?=gcc
+CXX?=g++
+LOCALE = ../FAEST/Reference_Implementation/faest_em_128f
+CFLAGS+=-g -O3 -std=gnu11 -march=native -Wno-psabi
+CPPFLAGS+=-I$(LOCALE) -I$(LOCALE)/sha3 -DNDEBUG -DHAVE_OPENSSL -DFAEST_EXPORT=
+
+SOURCES=$(filter-out $(LOCALE)/randomness.c,$(wildcard $(LOCALE)/*.c)) $(wildcard $(LOCALE)/sha3/*.c) $(wildcard $(LOCALE)/sha3/*.s)
+LIBFAEST=$(LOCALE)/libfaest.a
+NISTKAT_SOURCES=$(wildcard $(LOCALE)/NIST-KATs/*.c)
+RNG_SOURCES=$(filter-out $(LOCALE)/NIST-KATs/PQCgenKAT_sign.c,$(NISTKAT_SOURCES))
+
+all: $(LIBFAEST) bench_faest
+
+$(LIBFAEST): $(SOURCES:.c=.o) $(SOURCES:.s=.o)
+	ar rcs $@ $^
+
+$(LOCALE)/%.c.o: $(LOCALE)/%.c
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
+
+bench_faest: BenchmarkingcodeHAWK.c $(addsuffix .o, $(RNG_SOURCES)) $(LIBFAEST) $(LOCALE)/api.h $(LOCALE)/randomness.c
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $^ -lcrypto -o $@
+
+clean:
+	rm -f \
+		$(wildcard $(LOCALE)/*.o) \
+		$(wildcard $(LOCALE)/sha3/*.o) \
+		$(wildcard $(LOCALE)/NIST-KATs/*.o) \
+		$(wildcard $(LOCALE)/tests/*.o) \
+		$(LIBFAEST) bench_faest

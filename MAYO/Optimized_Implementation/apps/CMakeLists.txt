@@ -29,3 +29,12 @@ foreach(MVARIANT ${MVARIANT_S})
     target_include_directories(example_nistapi_${MVARIANT_LOWER} PRIVATE ../include ../src/${MVARIANT_LOWER})
 endforeach()
 
+## Benchmarking code
+foreach(MVARIANT ${MVARIANT_S})
+    string(TOLOWER ${MVARIANT} MVARIANT_LOWER)
+    add_executable(bench_${MVARIANT_LOWER} Benchmarkingcode.c)
+    target_link_libraries(bench_${MVARIANT_LOWER} PRIVATE ${MVARIANT_LOWER}_nistapi)
+    target_include_directories(bench_${MVARIANT_LOWER} PRIVATE ../include ../src/${MVARIANT_LOWER})
+endforeach()
+
+

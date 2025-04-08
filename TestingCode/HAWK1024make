@@ -1,0 +1,67 @@
+CC = gcc
+LOCALE = ../HAWK/Optimized_Implementation/avx2/hawk1024
+CFLAGS = -Wall -Wextra -Wshadow -Wundef -O2 -I$(LOCALE)
+LD = $(CC)
+LDFLAGS =
+LIBS =
+
+VPATH = -I$(LOCALE)
+OBJCORE = $(LOCALE)/hawk_kgen.o $(LOCALE)/hawk_sign.o $(LOCALE)/hawk_vrfy.o $(LOCALE)/ng_fxp.o $(LOCALE)/ng_hawk.o $(LOCALE)/ng_mp31.o $(LOCALE)/ng_ntru.o $(LOCALE)/ng_poly.o $(LOCALE)/ng_zint31.o $(LOCALE)/sha3.o 
+HEAD = $(LOCALE)/hawk.h $(LOCALE)/hawk_inner.h $(LOCALE)/hawk_config.h $(LOCALE)/sha3.h
+NG_HEAD = $(LOCALE)/ng_config.h $(LOCALE)/ng_inner.h $(LOCALE)/sha3.h
+OBJAPI = $(LOCALE)/api.o
+OBJEXTRA = $(LOCALE)/PQCgenKAT_sign.o $(LOCALE)/rng.o
+OBJEXTRA2 = BenchmarkingcodeHAWK.o $(LOCALE)/rng.o
+
+all: PQCgenKAT_sign
+
+PQCgenKAT_sign: $(OBJCORE) $(OBJAPI) $(OBJEXTRA)
+	$(LD) $(LDFLAGS) -o PQCgenKAT_sign $(OBJCORE) $(OBJAPI) $(OBJEXTRA) $(LIBS)
+
+bench-hawk: $(OBJCORE) $(OBJAPI) $(OBJEXTRA2)
+	$(LD) $(LDFLAGS) -o bench-hawk $(OBJCORE) $(OBJAPI) $(OBJEXTRA2) $(LIBS)
+
+clean:
+	-rm -f $(OBJCORE) $(OBJAPI) $(OBJEXTRA) $(OBJEXTRA2) PQCgenKAT_sign bench-hawk
+
+hawk_kgen.o: $(LOCALE)/hawk_kgen.c $(HEAD)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/hawk_kgen.o $(LOCALE)/hawk_kgen.c
+
+hawk_sign.o: $(LOCALE)/hawk_sign.c $(HEAD)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/hawk_sign.o $(LOCALE)/hawk_sign.c
+
+hawk_vrfy.o: $(LOCALE)/hawk_vrfy.c $(HEAD)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/hawk_vrfy.o $(LOCALE)/hawk_vrfy.c
+
+ng_fxp.o: $(LOCALE)/ng_fxp.c $(NG_HEAD)
+	$(CC) $(CFLAGS) -c -o ng_fxp.o $(LOCALE)/ng_fxp.c
+
+ng_hawk.o: $(LOCALE)/ng_hawk.c $(NG_HEAD)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/ng_hawk.o $(LOCALE)/ng_hawk.c
+
+ng_mp31.o: $(LOCALE)/ng_mp31.c $(NG_HEAD)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/ng_mp31.o $(LOCALE)/ng_mp31.c
+
+ng_ntru.o: $(LOCALE)/ng_ntru.c $(NG_HEAD)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/ng_ntru.o $(LOCALE)/ng_ntru.c
+
+ng_poly.o: $(LOCALE)/ng_poly.c $(NG_HEAD)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/ng_poly.o $(LOCALE)/ng_poly.c
+
+ng_zint31.o: $(LOCALE)/ng_zint31.c $(NG_HEAD)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/ng_zint31.o $(LOCALE)/ng_zint31.c
+
+sha3.o: $(LOCALE)/sha3.c $(NG_HEAD)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/sha3.o $(LOCALE)/sha3.c
+
+api.o: $(LOCALE)/api.c $(LOCALE)/api.h $(LOCALE)/hawk.h $(LOCALE)/sha3.h
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/api.o $(LOCALE)/api.c
+
+PQCgenKAT_sign.o: $(LOCALE)/PQCgenKAT_sign.c $(LOCALE)/api.h $(LOCALE)/rng.h
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/PQCgenKAT_sign.o $(LOCALE)/PQCgenKAT_sign.c
+
+BenchmarkingcodeHAWK.o: BenchmarkingcodeHAWK.c $(LOCALE)/api.h $(LOCALE)/rng.h
+	$(CC) $(CFLAGS) -c -o BenchmarkingcodeHAWK.o BenchmarkingcodeHAWK.c
+
+rng.o: $(LOCALE)/rng.c $(LOCALE)/rng.h
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/rng.o $(LOCALE)/rng.c

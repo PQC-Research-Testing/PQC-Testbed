@@ -29,7 +29,7 @@ ifeq ($(UNAME_S),Darwin)
     LIBS += -L/usr/local/opt/openssl/lib
 endif
 
-all: PQCgenKAT_sign mirath_1a_f
+all: PQCgenKAT_sign mirath_5a_f
 
 $(MIRATH)/%.o: $(MIRATH)/%.c
 	$(CC) -D_SHA3_ $(INCLUDES) -c -o $@ $< $(CFLAGS)
@@ -37,7 +37,7 @@ $(MIRATH)/%.o: $(MIRATH)/%.c
 $(MIRATH)/rng.o: $(MIRATH)/rng.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
-mirath_1a_f: $(MIRATH)/main.o $(MIRATH)/sign.o $(OBJ_MAIN)
+mirath_5a_f: $(MIRATH)/main.o $(MIRATH)/sign.o $(OBJ_MAIN)
 	$(CC) -o $@ $^ $(LIBS)
 
 PQCgenKAT_sign: $(MIRATH)/PQCgenKAT_sign.o $(MIRATH)/sign.o $(OBJ_KATS)
@@ -52,9 +52,15 @@ run: PQCgenKAT_sign
 .PHONY: clean
 
 clean:
+	rm -f $(MIRATH)/*.o $(MIRATH)/*.su
+	rm -f $(MIRATH)/common/*.o
+	rm -f $(MIRATH)/mirath_5a_f
+	rm -f $(MIRATH)/PQCgenKAT_sign
+	rm -f $(MIRATH)/PQCsignKAT_*.req
+	rm -f $(MIRATH)/PQCsignKAT_*.rsp
 	rm -f *.o *.su
 	rm -f common/*.o
-	rm -f mirath_1a_f
+	rm -f mirath_5a_f
 	rm -f PQCgenKAT_sign
 	rm -f PQCsignKAT_*.req
 	rm -f PQCsignKAT_*.rsp
