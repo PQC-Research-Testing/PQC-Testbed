@@ -1,7 +1,11 @@
 #This script contains working commands only, note that the ability to use
 #sudo permissions is needed to ensure that files can be moved to the 
 #Data directory for easy access.
-mkdir Data
+
+#EXECUTE SCRIPT WITH SUDO TO ALLOW FOR PROPER EXECUTION
+
+mkdir Data #Creates directory for storing performance data
+ulimit -s 15360 #Expands stack memory space for MIRATH short variants.
 #HAWK Implementation Benchmarking
 make -f HAWK512make bench-hawk
 for ((i=0; i<1000; i++))
@@ -163,6 +167,15 @@ mv Mirath Data
 mv ./Data/Mirath ./Data/MIRATH3AF
 make -f MIRATH3AF clean
 
+make -f MIRATH3AS bench_mirath
+for ((i=0; i<1000; i++))
+do
+    ./bench_mirath
+done
+mv Mirath Data
+mv ./Data/Mirath ./Data/MIRATH3AS
+make -f MIRATH3AS clean
+
 make -f MIRATH3BF bench_mirath
 for ((i=0; i<1000; i++))
 do
@@ -171,6 +184,16 @@ done
 mv Mirath Data
 mv ./Data/Mirath ./Data/MIRATH3BF
 make -f MIRATH3BF clean
+
+
+make -f MIRATH3BS bench_mirath
+for ((i=0; i<1000; i++))
+do
+    ./bench_mirath
+done
+mv Mirath Data
+mv ./Data/Mirath ./Data/MIRATH3BS
+make -f MIRATH3BS clean
 
 make -f MIRATH5AF bench_mirath
 for ((i=0; i<1000; i++))
@@ -181,6 +204,16 @@ mv Mirath Data
 mv ./Data/Mirath ./Data/MIRATH5AF
 make -f MIRATH5AF clean
 
+make -f MIRATH5AS bench_mirath
+for ((i=0; i<1000; i++))
+do
+    ./bench_mirath
+done
+mv Mirath Data
+mv ./Data/Mirath ./Data/MIRATH5AS
+make -f MIRATH5AS clean
+
+
 make -f MIRATH5BF bench_mirath
 for ((i=0; i<1000; i++))
 do
@@ -189,6 +222,15 @@ done
 mv Mirath Data
 mv ./Data/Mirath ./Data/MIRATH5BF
 make -f MIRATH5BF clean
+
+make -f MIRATH5BS bench_mirath
+for ((i=0; i<1000; i++))
+do
+    ./bench_mirath
+done
+mv Mirath Data
+mv ./Data/Mirath ./Data/MIRATH5BS
+make -f MIRATH5BS clean
 
 #MQOM2 Implementations
 
