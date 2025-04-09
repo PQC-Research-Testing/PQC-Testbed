@@ -27,23 +27,12 @@ static __inline__ unsigned long GetCC(void)
   return ((unsigned long)a) | (((unsigned long)d) << 32); 
 }
 
-static uint32_t rand_u32()
-{
-    unsigned char buf[4];
-    if (randombytes(buf, sizeof(buf)))
-        abort();
-    return ((uint32_t) buf[3] << 24)
-         | ((uint32_t) buf[2] << 16)
-         | ((uint32_t) buf[1] <<  8)
-         | ((uint32_t) buf[0] <<  0);
-}
-
 int
 main()
 {
-    unsigned char seed[48] = {0};
-    randombytes_init(seed, NULL, 256);
-    unsigned long long msglen = 100;
+    unsigned long long msglen = 1000;
+    int size = 11;
+    char realmsg[] = "hello world";
     unsigned long long smlen = CRYPTO_BYTES + msglen;
 
     unsigned char *sk = calloc(CRYPTO_SECRETKEYBYTES, 1);
@@ -79,8 +68,8 @@ main()
     printf("Time elapsed: %lu microseconds\n", timeElapsed);
     fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
     // choose a random message
-    for (size_t i = 0; i < msglen; i++){
-        msg[i] = 1;
+    for (size_t i = 0; i < msglen; i++){  
+        msg[i] = realmsg[i%size];
     }
 
     gettimeofday(&st, NULL);

@@ -9,6 +9,7 @@
 #include <sys/resource.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <string.h>
 #if defined(TARGET_BIG_ENDIAN)
 #include <tutil.h>
 #endif
@@ -29,7 +30,9 @@ static __inline__ unsigned long GetCC(void)
 int
 main()
 {
-    unsigned long long msglen = 100;
+    unsigned long long msglen = 1000;
+    int size = 11;
+    char realmsg[] = "hello world";
     unsigned long long smlen = CRYPTO_BYTES + msglen;
 
     unsigned char *sk = calloc(CRYPTO_SECRETKEYBYTES, 1);
@@ -66,7 +69,8 @@ main()
      fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
      // choose a random message
      for (size_t i = 0; i < msglen; i++){
-         msg[i] = 1;
+         
+         msg[i] = realmsg[i%size];
      }
  
      gettimeofday(&st, NULL);
