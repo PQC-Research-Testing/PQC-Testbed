@@ -82,7 +82,7 @@ foreach(category "252" "400" "548")
 
     ## settings for comparison benchmarking
     set(TARGET_BINARY_NAME bench_LESS_${category}_${optimize_target})
-    add_executable(${TARGET_BINARY_NAME} ${HEADERS} ${SOURCES} ${PROJECT_SOURCE_DIR}/lib/bench/Benchmarkingcode.c)
+    add_executable(${TARGET_BINARY_NAME} ${HEADERS} ${SOURCES} ${PROJECT_SOURCE_DIR}/Benchmarkingcode.c)
     target_link_libraries(${TARGET_BINARY_NAME} m)
     set_property(TARGET ${TARGET_BINARY_NAME} APPEND PROPERTY COMPILE_FLAGS "-DCATEGORY=${category} -DTARGET=${optimize_target} ${KECCAK_EXTERNAL_ENABLE} ")
     

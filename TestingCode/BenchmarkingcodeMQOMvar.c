@@ -44,7 +44,7 @@ int
 main(void)
 {
     unsigned long long msglen = 1000;
-    int size = 11;
+    int sizemsg = 11;
     char realmsg[] = "hello world";
     unsigned long long smlen = CRYPTO_BYTES + msglen;
 
@@ -83,7 +83,7 @@ main(void)
     fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
     // choose a random message
     for (size_t i = 0; i < msglen; i++){  
-        msg[i] = realmsg[i%size];
+        msg[i] = realmsg[i%sizemsg];
     }
 
     gettimeofday(&st, NULL);

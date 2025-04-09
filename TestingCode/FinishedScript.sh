@@ -1,3 +1,4 @@
+#!/bin/bash
 #This script contains working commands only, note that the ability to use
 #sudo permissions is needed to ensure that files can be moved to the 
 #Data directory for easy access.

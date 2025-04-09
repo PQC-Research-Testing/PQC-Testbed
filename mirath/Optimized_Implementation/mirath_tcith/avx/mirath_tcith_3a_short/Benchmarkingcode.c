@@ -27,23 +27,12 @@ static __inline__ unsigned long GetCC(void)
   return ((unsigned long)a) | (((unsigned long)d) << 32); 
 }
 
-static uint32_t rand_u32()
-{
-    unsigned char buf[4];
-    if (randombytes(buf, sizeof(buf)))
-        abort();
-    return ((uint32_t) buf[3] << 24)
-         | ((uint32_t) buf[2] << 16)
-         | ((uint32_t) buf[1] <<  8)
-         | ((uint32_t) buf[0] <<  0);
-}
-
 int
 main()
 {
-    unsigned char seed[48] = {0};
-    randombytes_init(seed, NULL, 256);
-    unsigned long long msglen = 100;
+    unsigned long long msglen = 1000;
+    int sizemsg = 11;
+    char realmsg[] = "hello world";
     unsigned long long smlen = CRYPTO_BYTES + msglen;
 
     unsigned char *sk = calloc(CRYPTO_SECRETKEYBYTES, 1);
@@ -58,7 +47,7 @@ main()
     unsigned long rss_peak;
 
     //file for storing runtime data
-    FILE *file = fopen(CRYPTO_ALGNAME, "w+");
+    FILE *file = fopen(CRYPTO_ALGNAME, "a");
     if(file){
         fseek(file, 0, SEEK_END);
         long size = ftell(file);
@@ -77,12 +66,10 @@ main()
     timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
     printf("Time elapsed: %lu microseconds\n", timeElapsed);
-    printf("reached");
     fprintf(file, "%.2f, %lu, ",(double)(after-before)/1000000, timeElapsed);
-    printf("reached");
     // choose a random message
-    for (size_t i = 0; i < msglen; i++){
-        msg[i] = '1';
+    for (size_t i = 0; i < msglen; i++){  
+        msg[i] = realmsg[i%sizemsg];
     }
 
     gettimeofday(&st, NULL);

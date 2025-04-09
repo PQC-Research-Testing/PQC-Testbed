@@ -6,7 +6,6 @@
 #include <time.h>
 #include <sys/time.h>
 #include <api.h>
-#include <parameters.h>
 #include <sys/resource.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -15,38 +14,26 @@
 #include <tutil.h>
 #endif
 
-static __inline__ unsigned long GetCC(void)
-{
-  unsigned a, d; 
-  asm ("rdtsc" : "=a" (a), "=d" (d)); 
-  return ((unsigned long)a) | (((unsigned long)d) << 32); 
-}
-
-size_t getPeakRSS(void);
-size_t getPeakRSS(void){
+size_t getPeakRSS(){
     struct rusage rusage;
     getrusage(RUSAGE_SELF, &rusage );
     return (size_t)(rusage.ru_maxrss * 1024L);
 }
 
-static uint32_t rand_u32(void)
+static __inline__ unsigned long GetCC(void)
 {
-    unsigned char buf[4];
-    if (randombytes(buf, sizeof(buf)))
-        abort();
-    return ((uint32_t) buf[3] << 24)
-         | ((uint32_t) buf[2] << 16)
-         | ((uint32_t) buf[1] <<  8)
-         | ((uint32_t) buf[0] <<  0);
+  unsigned a, d; 
+  asm volatile("rdtsc" : "=a" (a), "=d" (d)); 
+  return ((unsigned long)a) | (((unsigned long)d) << 32); 
 }
 
 int
-main(void)
+main()
 {
     unsigned long long msglen = 1000;
     int sizemsg = 11;
     char realmsg[] = "hello world";
-    unsigned long long smlen = CRYPTO_BYTES + msglen;
+    unsigned long long int smlen = CRYPTO_BYTES + msglen;
 
     unsigned char *sk = calloc(CRYPTO_SECRETKEYBYTES, 1);
     unsigned char *pk = calloc(CRYPTO_PUBLICKEYBYTES, 1);
@@ -54,7 +41,6 @@ main(void)
     unsigned long timeElapsed;
     unsigned char *sm = calloc(smlen, 1);
     int res = 0;
-    unsigned char temp;
     unsigned char msg[msglen], msg2[msglen];
     unsigned long before, after;
     unsigned long rss_peak;
