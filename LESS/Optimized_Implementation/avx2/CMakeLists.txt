@@ -7,6 +7,7 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 enable_testing()
 find_package(OpenSSL)
 
+set(BENCHMARKING ../../../TestingCode/Benchmarkingcode.c)
 set(default_build_type "Release")
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
@@ -82,7 +83,7 @@ foreach(category "252" "400" "548")
 
     ## settings for comparison benchmarking
     set(TARGET_BINARY_NAME bench_LESS_${category}_${optimize_target})
-    add_executable(${TARGET_BINARY_NAME} ${HEADERS} ${SOURCES} ${PROJECT_SOURCE_DIR}/Benchmarkingcode.c)
+    add_executable(${TARGET_BINARY_NAME} ${HEADERS} ${SOURCES} ${BENCHMARKING})
     target_link_libraries(${TARGET_BINARY_NAME} m)
     set_property(TARGET ${TARGET_BINARY_NAME} APPEND PROPERTY COMPILE_FLAGS "-DCATEGORY=${category} -DTARGET=${optimize_target} ${KECCAK_EXTERNAL_ENABLE} ")
     

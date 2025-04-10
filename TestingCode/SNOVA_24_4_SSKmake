@@ -160,7 +160,6 @@ test: init info build/rng.o build/snova.o build/ct_functions.o $(STATICLIB)
 test_api: init info build/sign.o build/ct_functions.o $(STATICLIB)
 	$(CC) -std=c11 $(CFLAGS) $(SNOVA_PARAMS) $(OLIST) build/rng.o $(LOCALE)/test/test_api.c build/sign.o -o test_api.a $(LIBS)
 
-
 bench_snova: build/rng.o build/sign.o build/snova.o $(LOCALE)/api.h $(STATICLIB)
 	$(CC) $(CFLAGS) $(SNOVA_PARAMS) $(OLIST) BenchmarkingcodeSNOVA.c build/rng.o build/sign.o -o bench_snova $(LIBS)
 

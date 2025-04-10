@@ -1,5 +1,8 @@
 add_executable(PQCGenKat_sign PQCgenKAT_sign.c rng.c rng.h sign.c)
+add_executable(bench ../../../../TestingCode/Benchmarkingcode.c rng.c rng.h api.h sign.c sign.c)
 target_include_directories(PQCGenKat_sign PRIVATE ${kats_incs})
 target_link_libraries(PQCGenKat_sign vole ${kats_libs} m)
+target_include_directories(bench PRIVATE ${kats_incs} ../generator)
+target_link_libraries(bench vole ${kats_libs} m)
 set_source_files_properties(PQCgenKAT_sign.c PROPERTIES COMPILE_OPTIONS "-Wno-unused-result")
 set_source_files_properties(rng.c PROPERTIES COMPILE_OPTIONS "-Wno-unused-but-set-variable")

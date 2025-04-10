@@ -17,8 +17,8 @@ TMP=$(MIRATH)/rng.o $(subst $(MIRATH)/common/random.o, ,$(patsubst $(MIRATH)/com
 OBJ=$(subst $(MIRATH)/common/KeccakP-1600-times4-SIMD256.o, ,$(TMP))
 OBJ+=$(patsubst $(MIRATH)/%.c,$(MIRATH)/%.o,$(wildcard $(MIRATH)/*.c))
 
-OBJ_MAIN = $(filter-out $(MIRATH)/PQCgenKAT_sign.o $(MIRATH)/Benchmarkingcode.o, $(OBJ))
-OBJ_KATS = $(filter-out $(MIRATH)/main.o $(MIRATH)/Benchmarkingcode.o, $(OBJ))
+OBJ_MAIN = $(filter-out $(MIRATH)/PQCgenKAT_sign.o , $(OBJ))
+OBJ_KATS = $(filter-out $(MIRATH)/main.o, $(OBJ))
 OBJ_BENCH = $(filter-out $(MIRATH)/main.o $(MIRATH)/PQCgenKAT_sign.o, $(OBJ))
 $(info [${OBJ}])
 VPATH = $(PARAMETERS):$(ARITH_MU):$(ARITH_X):$(ARITH):$(RIJNDAEL):$(COMMON):$(MIRATH)
@@ -43,6 +43,9 @@ mirath_1a_f: $(MIRATH)/main.o $(MIRATH)/sign.o $(OBJ_MAIN)
 PQCgenKAT_sign: $(MIRATH)/PQCgenKAT_sign.o $(MIRATH)/sign.o $(OBJ_KATS)
 	$(CC) -o $@ $^ $(LIBS)
 
+Benchmarkingcode.o: Benchmarkingcode.c $(MIRATH)/api.h $(MIRATH)/sign.o
+	$(CC) $(CFLAGS) -c -o $(MIRATH)/Benchmarkingcode.o Benchmarkingcode.c
+	
 bench_mirath: $(MIRATH)/Benchmarkingcode.o $(MIRATH)/sign.o $(OBJ_BENCH)
 	$(CC) -o $@ $^ $(LIBS)
 

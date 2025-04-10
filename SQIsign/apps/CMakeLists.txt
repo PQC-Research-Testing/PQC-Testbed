@@ -1,3 +1,4 @@
+set(BENCHMARKING ../../TestingCode/Benchmarkingcode.c)
 if (ENABLE_SIGN)
 
     # NIST KAT generation apps
@@ -31,7 +32,7 @@ if (ENABLE_SIGN)
     # Benchmarking tool
     foreach(SVARIANT ${SVARIANT_S})
         string(TOLOWER ${SVARIANT} SVARIANT_LOWER)
-        add_executable(benchmark_${SVARIANT_LOWER} benchmark.c)
+        add_executable(benchmark_${SVARIANT_LOWER} ${BENCHMARKING})
         target_link_libraries(benchmark_${SVARIANT_LOWER} PRIVATE sqisign_${SVARIANT_LOWER}_nistapi)
         target_include_directories(benchmark_${SVARIANT_LOWER} PRIVATE ../include ../src/common/generic/include)
         target_compile_definitions(benchmark_${SVARIANT_LOWER} PUBLIC SQISIGN_VARIANT=${SVARIANT_LOWER})

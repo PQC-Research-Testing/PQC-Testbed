@@ -9,7 +9,6 @@
 #include <sys/resource.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <randombytes.h>
 #if defined(TARGET_BIG_ENDIAN)
 #include <tutil.h>
 #endif
@@ -27,17 +26,6 @@ static __inline__ unsigned long GetCC(void)
   return ((unsigned long)a) | (((unsigned long)d) << 32); 
 }
 
-static uint32_t rand_u32()
-{
-    unsigned char buf[4];
-    if (randombytes(buf, sizeof(buf)))
-        abort();
-    return ((uint32_t) buf[3] << 24)
-         | ((uint32_t) buf[2] << 16)
-         | ((uint32_t) buf[1] <<  8)
-         | ((uint32_t) buf[0] <<  0);
-}
-
 int
 main()
 {
@@ -52,7 +40,6 @@ main()
     unsigned long timeElapsed;
     unsigned char *sm = calloc(smlen, 1);
     int res = 0;
-    unsigned char temp;
     unsigned char msg[msglen], msg2[msglen];
     unsigned long before, after;
     unsigned long rss_peak;

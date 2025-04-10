@@ -5,7 +5,7 @@ CFLAGS=-march=native -mtune=native -O3 -fomit-frame-pointer -fwrapv -fPIC -fPIE 
 LDFLAGS=-lcrypto -Wl,-Bstatic -lcrypto -Wl,-Bdynamic -lm
 # CFLAGS=-march=native -mtune=native -O3 -fwrapv -fPIC -fPIE -fopenmp -Wno-deprecated-declarations -Wno-unused-result -pg -g # -ggdb3
 # LDFLAGS=-lcrypto -Wl,-Bstatic -lcrypto -Wl,-Bdynamic -lm -pg -g
-OBJS=$(LOCALE)/Fql.o $(LOCALE)/qruov.o $(LOCALE)/rng.o $(LOCALE)/sign.o $(LOCALE)/matrix.o $(LOCALE)/mgf.o BenchmarkingcodeHAWK.o 
+OBJS=$(LOCALE)/Fql.o $(LOCALE)/qruov.o $(LOCALE)/rng.o $(LOCALE)/sign.o $(LOCALE)/matrix.o $(LOCALE)/mgf.o BenchmarkingcodeVariant.o 
 VPATH=$(LOCALE)
 .SUFFIXES:
 .SUFFIXES: .rsp .req .diff .c .o .h

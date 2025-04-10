@@ -1,13 +1,16 @@
 cd ..
-cd CROSS/Additional_Implementations/Benchmarking
-cmake CMakeLists.txt
-make bench_CROSS_1_RSDP_SIG_SIZE
-for ((i=0; i<1; i++))
+cd SQIsign/
+mkdir build
+cd build
+cmake -DSQISIGN_BUILD_TYPE=opt -DCMAKE_BUILD_TYPE=Release ..
+
+cd apps
+make benchmark_lvl1
+for ((i=0; i<2; i++))
 do
-    ./bin/bench_CROSS_1_RSDP_SIG_SIZE
+    ./benchmark_lvl1
 done
 make clean
 cd ../../..
 cd TestingCode/
-sudo mv ../CROSS/Additional_Implementations/Benchmarking/CROSS Data
-mv ./Data/CROSS ./Data/CROSS_1_RSDP_SMALL
+sudo mv ../SQIsign/build/apps/SQIsign_lvl1 Data

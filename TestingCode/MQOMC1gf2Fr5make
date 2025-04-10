@@ -138,7 +138,7 @@ bench: libhash $(OBJS)
 	$(CC) $(CFLAGS) benchmark/bench.c benchmark/timing.c $(OBJS) $(LIB_HASH) -lm -o bench
 
 mqom-bench: libhash $(OBJS)
-	$(CC) $(CFLAGS) ../TestingCode/BenchmarkingcodeMQOMvar.c ../MQOM/Optimized_Implementation_AVX2/mqom2_cat1_gf2_fast_r5/generator/rng.c $(OBJS) $(LIB_HASH) -lcrypto -o mqom-bench
+	$(CC) $(CFLAGS) ../TestingCode/Benchmarkingcode.c ../MQOM/Optimized_Implementation_AVX2/mqom2_cat1_gf2_fast_r5/generator/rng.c $(OBJS) $(LIB_HASH) -lcrypto -o mqom-bench
 
 clean:
 	rm -f kat_gen kat_check bench sign mqom-bench

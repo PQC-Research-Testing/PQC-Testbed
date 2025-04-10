@@ -34,7 +34,7 @@ all: $(EXE)
 sign_api-test: $(OBJ) $(GEN_DIR)/sign_api-test.c
 	$(CC) $(CFLAGS) $(INCPATH) $(LDFLAGS) $(LIBPATH) $^ -o $@ $(LIBS)
 
-bench_uov: $(OBJ2) BenchmarkingcodeHAWK.c rng.o
+bench_uov: $(OBJ2) BenchmarkingcodeVariant.c rng.o
 	$(CC) $(CFLAGS) $(INCPATH) $(LDFLAGS) $(LIBPATH) $^ -o $@ $(LIBS)
 	$(info $(OBJ))
 PQCgenKAT_sign: $(OBJ) PQCgenKAT_sign.o

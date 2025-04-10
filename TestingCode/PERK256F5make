@@ -17,7 +17,7 @@ MAIN_KAT_SRC:=$(SRC_DIR)/PQCgenKAT_sign.c
 MAIN_PERK_EXEC:=$(BIN_DIR)/perk-256-fast-5$(EXT)
 MAIN_KAT_EXEC:=$(BIN_DIR)/perk-256-fast-5-PQCgenKAT_sign
 BENCH_EXEC:=$(BIN_DIR)/perk-256-fast-5-bench
-BENCH_SRC:=../TestingCode/BenchmarkingcodeVariant.c
+BENCH_SRC:=../TestingCode/Benchmarkingcode.c
 # exclude sources from "find"
 EXCL_SRC:=! -name $(notdir $(MAIN_PERK_SRC)) \
           ! -name $(notdir $(MAIN_KAT_SRC)) \

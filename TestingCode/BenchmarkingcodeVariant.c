@@ -5,12 +5,10 @@
 #include <stdint.h>
 #include <time.h>
 #include <sys/time.h>
-#include <api.h>
-#include <parameters.h>
+#include "api.h"
 #include <sys/resource.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <rng.h>
 #if defined(TARGET_BIG_ENDIAN)
 #include <tutil.h>
 #endif
@@ -29,16 +27,6 @@ size_t getPeakRSS(void){
     return (size_t)(rusage.ru_maxrss * 1024L);
 }
 
-static uint32_t rand_u32(void)
-{
-    unsigned char buf[4];
-    if (randombytes(buf, sizeof(buf)))
-        abort();
-    return ((uint32_t) buf[3] << 24)
-         | ((uint32_t) buf[2] << 16)
-         | ((uint32_t) buf[1] <<  8)
-         | ((uint32_t) buf[0] <<  0);
-}
 
 int
 main(void)
@@ -54,7 +42,6 @@ main(void)
     unsigned long timeElapsed;
     unsigned char *sm = calloc(smlen, 1);
     int res = 0;
-    unsigned char temp;
     unsigned char msg[msglen], msg2[msglen];
     unsigned long before, after;
     unsigned long rss_peak;
@@ -68,7 +55,8 @@ main(void)
             fprintf(file, "Keygen CC,Keygen Time (Microseconds), Signature CC,Signature Time (Microseconds),Verification CC,Verification Time (Microseconds),PEAK RSS (KB)\n");
         }
     }
-
+    //print statements used to ensure data being gathered. To be removed and replaced with logging in a file.
+    //focus on getting everything working first. 
     printf("Bench with %s\n", CRYPTO_ALGNAME);
     gettimeofday(&st, NULL);
     before = GetCC();

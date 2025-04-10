@@ -60,8 +60,8 @@ api.o: $(LOCALE)/api.c $(LOCALE)/api.h $(LOCALE)/hawk.h $(LOCALE)/sha3.h
 PQCgenKAT_sign.o: $(LOCALE)/PQCgenKAT_sign.c $(LOCALE)/api.h $(LOCALE)/rng.h
 	$(CC) $(CFLAGS) -c -o $(LOCALE)/PQCgenKAT_sign.o $(LOCALE)/PQCgenKAT_sign.c
 
-BenchmarkingcodeHAWK.o: BenchmarkingcodeHAWK.c $(LOCALE)/api.h $(LOCALE)/rng.h
-	$(CC) $(CFLAGS) -c -o BenchmarkingcodeHAWK.o BenchmarkingcodeHAWK.c
+BenchmarkingcodeHAWK.o: BenchmarkingcodeVariant.c $(LOCALE)/api.h $(LOCALE)/rng.h
+	$(CC) $(CFLAGS) -c -o BenchmarkingcodeHAWK.o BenchmarkingcodeVariant.c
 
 rng.o: $(LOCALE)/rng.c $(LOCALE)/rng.h
 	$(CC) $(CFLAGS) -c -o $(LOCALE)/rng.o $(LOCALE)/rng.c

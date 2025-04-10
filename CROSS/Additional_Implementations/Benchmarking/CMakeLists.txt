@@ -24,7 +24,7 @@ endif()
 # implementations.
 set(REFERENCE_CODE_DIR ../../Reference_Implementation)
 set(OPTIMIZED_CODE_DIR ../../Optimized_Implementation)
-
+set(BENCHMARKING ../../../TestingCode/Benchmarkingcode.c)
 if(REFERENCE EQUAL 1)
 message("Compiling portable reference code")
 set(BASE_DIR ${REFERENCE_CODE_DIR})
@@ -122,7 +122,7 @@ foreach(category RANGE 1 5 2)
             #Benchmarking for comparison.
              set(TARGET_BINARY_NAME bench_CROSS_${category}_${RSDP_VARIANT}_${optimiz_target})
              add_executable(${TARGET_BINARY_NAME} ${HEADERS} ${SOURCES}
-                            ./lib/Benchmarkingcode.c)
+                            ${BENCHMARKING})
              target_include_directories(${TARGET_BINARY_NAME} PRIVATE
                                     ${BASE_DIR}/include
                                     ${COMMON_DIR}/include
