@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG "CMakeFiles/bench.dir/home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.o" CMakeFiles/bench.dir/rng.c.o CMakeFiles/bench.dir/sign.c.o -o bench  ../libvole.a /usr/lib/x86_64-linux-gnu/libcrypto.so -lm ../lib/sha3/libsha3.a ../lib/aes/libaes.a 
