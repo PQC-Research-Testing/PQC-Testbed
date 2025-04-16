@@ -140,6 +140,20 @@ PQCGenKat_sign/fast:
 	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/PQCGenKat_sign.dir/build.make generator/CMakeFiles/PQCGenKat_sign.dir/build
 .PHONY : PQCGenKat_sign/fast
 
+# Convenience name for target.
+generator/CMakeFiles/bench.dir/rule:
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 generator/CMakeFiles/bench.dir/rule
+.PHONY : generator/CMakeFiles/bench.dir/rule
+
+# Convenience name for target.
+bench: generator/CMakeFiles/bench.dir/rule
+.PHONY : bench
+
+# fast build rule for target.
+bench/fast:
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/build
+.PHONY : bench/fast
+
 PQCgenKAT_sign.o: PQCgenKAT_sign.c.o
 .PHONY : PQCgenKAT_sign.o
 
@@ -164,12 +178,37 @@ PQCgenKAT_sign.c.s:
 	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/PQCGenKat_sign.dir/build.make generator/CMakeFiles/PQCGenKat_sign.dir/PQCgenKAT_sign.c.s
 .PHONY : PQCgenKAT_sign.c.s
 
+home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.o: home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.o
+.PHONY : home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.o
+
+# target to build an object file
+home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.o:
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.o
+.PHONY : home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.o
+
+home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.i: home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.i
+.PHONY : home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.i
+
+# target to preprocess a source file
+home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.i:
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.i
+.PHONY : home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.i
+
+home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.s: home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.s
+.PHONY : home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.s
+
+# target to generate assembly for a file
+home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.s:
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.s
+.PHONY : home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.c.s
+
 rng.o: rng.c.o
 .PHONY : rng.o
 
 # target to build an object file
 rng.c.o:
 	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/PQCGenKat_sign.dir/build.make generator/CMakeFiles/PQCGenKat_sign.dir/rng.c.o
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/rng.c.o
 .PHONY : rng.c.o
 
 rng.i: rng.c.i
@@ -178,6 +217,7 @@ rng.i: rng.c.i
 # target to preprocess a source file
 rng.c.i:
 	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/PQCGenKat_sign.dir/build.make generator/CMakeFiles/PQCGenKat_sign.dir/rng.c.i
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/rng.c.i
 .PHONY : rng.c.i
 
 rng.s: rng.c.s
@@ -186,6 +226,7 @@ rng.s: rng.c.s
 # target to generate assembly for a file
 rng.c.s:
 	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/PQCGenKat_sign.dir/build.make generator/CMakeFiles/PQCGenKat_sign.dir/rng.c.s
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/rng.c.s
 .PHONY : rng.c.s
 
 sign.o: sign.c.o
@@ -194,6 +235,7 @@ sign.o: sign.c.o
 # target to build an object file
 sign.c.o:
 	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/PQCGenKat_sign.dir/build.make generator/CMakeFiles/PQCGenKat_sign.dir/sign.c.o
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/sign.c.o
 .PHONY : sign.c.o
 
 sign.i: sign.c.i
@@ -202,6 +244,7 @@ sign.i: sign.c.i
 # target to preprocess a source file
 sign.c.i:
 	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/PQCGenKat_sign.dir/build.make generator/CMakeFiles/PQCGenKat_sign.dir/sign.c.i
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/sign.c.i
 .PHONY : sign.c.i
 
 sign.s: sign.c.s
@@ -210,6 +253,7 @@ sign.s: sign.c.s
 # target to generate assembly for a file
 sign.c.s:
 	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/PQCGenKat_sign.dir/build.make generator/CMakeFiles/PQCGenKat_sign.dir/sign.c.s
+	cd /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast && $(MAKE) $(MAKESILENT) -f generator/CMakeFiles/bench.dir/build.make generator/CMakeFiles/bench.dir/sign.c.s
 .PHONY : sign.c.s
 
 # Help Target
@@ -222,9 +266,13 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... PQCGenKat_sign"
+	@echo "... bench"
 	@echo "... PQCgenKAT_sign.o"
 	@echo "... PQCgenKAT_sign.i"
 	@echo "... PQCgenKAT_sign.s"
+	@echo "... home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.o"
+	@echo "... home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.i"
+	@echo "... home/ryane/PQC-Testbed/TestingCode/Benchmarkingcode.s"
 	@echo "... rng.o"
 	@echo "... rng.i"
 	@echo "... rng.s"

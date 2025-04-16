@@ -12,6 +12,7 @@
 /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/aes/CMakeFiles/edit_cache.dir
 /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/lib/aes/CMakeFiles/rebuild_cache.dir
 /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/generator/CMakeFiles/PQCGenKat_sign.dir
+/home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/generator/CMakeFiles/bench.dir
 /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/generator/CMakeFiles/test.dir
 /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/generator/CMakeFiles/edit_cache.dir
 /home/ryane/PQC-Testbed/SDitH-v2/Optimized_Implementation/sdith_cat1_fast/generator/CMakeFiles/rebuild_cache.dir

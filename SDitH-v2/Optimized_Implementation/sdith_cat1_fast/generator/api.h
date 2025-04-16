@@ -1,5 +1,5 @@
-/*
-NIST-developed software is provided by NIST as a public service. You may use, copy, and distribute copies of the
+
+/*NIST-developed software is provided by NIST as a public service. You may use, copy, and distribute copies of the
 software in any medium, provided that you keep intact this entire notice. You may improve, modify, and create derivative
 works of the software or any portion of the software, and you may copy and distribute such modifications or works.
 Modified works should carry a notice stating that you changed the software and should note the date and nature of any

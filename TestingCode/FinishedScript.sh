@@ -9,7 +9,7 @@ mkdir Data #Creates directory for storing performance data
 ulimit -s 15360 #Expands stack memory space for MIRATH short variants.
 #HAWK Implementation Benchmarking
 make -f HAWK512make bench-hawk
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench-hawk
 done
@@ -17,7 +17,7 @@ mv Hawk-512 Data
 make -f HAWK512make clean
 
 make -f HAWK1024make bench-hawk
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench-hawk
 done
@@ -26,7 +26,7 @@ make -f HAWK1024make clean
 
 #FAEST Implementation
 make -f FAEST128fmake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -34,7 +34,7 @@ mv faest_128f Data
 make -f FAEST128fmake clean
 
 make -f FAEST128smake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -42,7 +42,7 @@ mv faest_128s Data
 make -f FAEST128smake clean
 
 make -f FAEST192fmake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -50,7 +50,7 @@ mv faest_192f Data
 make -f FAEST192fmake clean
 
 make -f FAEST192smake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -58,7 +58,7 @@ mv faest_192s Data
 make -f FAEST192smake clean
 
 make -f FAEST256fmake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -66,7 +66,7 @@ mv faest_256f Data
 make -f FAEST256fmake clean
 
 make -f FAEST256smake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -74,7 +74,7 @@ mv faest_256s Data
 make -f FAEST256smake clean
 
 make -f FAESTem128fmake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -82,7 +82,7 @@ mv faest_em_128f Data
 make -f FAEST128fmake clean
 
 make -f FAESTem128smake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -90,7 +90,7 @@ mv faest_em_128s Data
 make -f FAEST128smake clean
 
 make -f FAESTem192fmake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -98,7 +98,7 @@ mv faest_em_192f Data
 make -f FAEST192fmake clean
 
 make -f FAESTem192smake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -106,7 +106,7 @@ mv faest_em_192s Data
 make -f FAEST192smake clean
 
 make -f FAESTem256fmake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -114,7 +114,7 @@ mv faest_em_256f Data
 make -f FAESTem256fmake clean
 
 make -f FAESTem256smake
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_faest
 done
@@ -124,7 +124,7 @@ make -f FAESTem256smake clean
 #MIRATH Implementation
 
 make -f MIRATH1AF bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -133,7 +133,7 @@ mv ./Data/Mirath ./Data/MIRATH1AF
 make -f MIRATH1AF clean
 
 make -f MIRATH1AS bench_mirath
-for ((i=0; i<1; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -142,7 +142,7 @@ mv ./Data/Mirath ./Data/MIRATH1AS
 make -f MIRATH1AS clean
 
 make -f MIRATH1BF bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -151,7 +151,7 @@ mv ./Data/Mirath ./Data/MIRATH1BF
 make -f MIRATH1BF clean
 
 make -f MIRATH1BS bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -160,7 +160,7 @@ mv ./Data/Mirath ./Data/MIRATH1BS
 make -f MIRATH1BS clean
 
 make -f MIRATH3AF bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -169,7 +169,7 @@ mv ./Data/Mirath ./Data/MIRATH3AF
 make -f MIRATH3AF clean
 
 make -f MIRATH3AS bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -178,7 +178,7 @@ mv ./Data/Mirath ./Data/MIRATH3AS
 make -f MIRATH3AS clean
 
 make -f MIRATH3BF bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -188,7 +188,7 @@ make -f MIRATH3BF clean
 
 
 make -f MIRATH3BS bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -197,7 +197,7 @@ mv ./Data/Mirath ./Data/MIRATH3BS
 make -f MIRATH3BS clean
 
 make -f MIRATH5AF bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -206,7 +206,7 @@ mv ./Data/Mirath ./Data/MIRATH5AF
 make -f MIRATH5AF clean
 
 make -f MIRATH5AS bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -216,7 +216,7 @@ make -f MIRATH5AS clean
 
 
 make -f MIRATH5BF bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -225,7 +225,7 @@ mv ./Data/Mirath ./Data/MIRATH5BF
 make -f MIRATH5BF clean
 
 make -f MIRATH5BS bench_mirath
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_mirath
 done
@@ -236,7 +236,7 @@ make -f MIRATH5BS clean
 #MQOM2 Implementations
 
 make -f MQOMC1gf2Fr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -244,7 +244,7 @@ mv  MQOM2-L1-gf2-fast-r3 Data
 make -f MQOMC1gf2Fr3make clean
 
 make -f MQOMC1gf2Fr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -252,7 +252,7 @@ mv  MQOM2-L1-gf2-fast-r5 Data
 make -f MQOMC1gf2Fr5make clean
 
 make -f MQOMC1gf2Sr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -260,7 +260,7 @@ mv  MQOM2-L1-gf2-short-r3 Data
 make -f MQOMC1gf2Sr3make clean
 
 make -f MQOMC1gf2Sr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -268,7 +268,7 @@ mv  MQOM2-L1-gf2-short-r5 Data
 make -f MQOMC1gf2Sr5make clean
 
 make -f MQOMC1gf256Fr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -276,7 +276,7 @@ mv  MQOM2-L1-gf256-fast-r3 Data
 make -f MQOMC1gf256Fr3make clean
 
 make -f MQOMC1gf256Fr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -284,7 +284,7 @@ mv  MQOM2-L1-gf256-fast-r5 Data
 make -f MQOMC1gf256Fr5make clean
 
 make -f MQOMC1gf256Sr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -292,7 +292,7 @@ mv  MQOM2-L1-gf256-short-r3 Data
 make -f MQOMC1gf256Sr3make clean
 
 make -f MQOMC1gf256Sr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -301,7 +301,7 @@ make -f MQOMC1gf256Sr5make clean
 
 #MQOM2 Level 3 Variants
 make -f MQOMC3gf2Fr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -309,7 +309,7 @@ mv  MQOM2-L3-gf2-fast-r3 Data
 make -f MQOMC3gf2Fr3make clean
 
 make -f MQOMC3gf2Fr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -317,7 +317,7 @@ mv  MQOM2-L3-gf2-fast-r5 Data
 make -f MQOMC3gf2Fr5make clean
 
 make -f MQOMC3gf2Sr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -325,7 +325,7 @@ mv  MQOM2-L3-gf2-short-r3 Data
 make -f MQOMC3gf2Sr3make clean
 
 make -f MQOMC3gf2Sr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -333,7 +333,7 @@ mv  MQOM2-L3-gf2-short-r5 Data
 make -f MQOMC3gf2Sr5make clean
 
 make -f MQOMC3gf256Fr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -341,7 +341,7 @@ mv  MQOM2-L3-gf256-fast-r3 Data
 make -f MQOMC3gf256Fr3make clean
 
 make -f MQOMC3gf256Fr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -349,7 +349,7 @@ mv  MQOM2-L3-gf256-fast-r5 Data
 make -f MQOMC3gf256Fr5make clean
 
 make -f MQOMC3gf256Sr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -357,7 +357,7 @@ mv  MQOM2-L3-gf256-short-r3 Data
 make -f MQOMC3gf256Sr3make clean
 
 make -f MQOMC3gf256Sr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -366,7 +366,7 @@ make -f MQOMC3gf256Sr5make clean
 
 #MQOM2 Level 5 Variants
 make -f MQOMC5gf2Fr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -374,7 +374,7 @@ mv  MQOM2-L5-gf2-fast-r3 Data
 make -f MQOMC5gf2Fr3make clean
 
 make -f MQOMC5gf2Fr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -382,7 +382,7 @@ mv  MQOM2-L5-gf2-fast-r5 Data
 make -f MQOMC5gf2Fr5make clean
 
 make -f MQOMC5gf2Sr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -390,7 +390,7 @@ mv  MQOM2-L5-gf2-short-r3 Data
 make -f MQOMC5gf2Sr3make clean
 
 make -f MQOMC5gf2Sr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -398,7 +398,7 @@ mv  MQOM2-L5-gf2-short-r5 Data
 make -f MQOMC5gf2Sr5make clean
 
 make -f MQOMC5gf256Fr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -406,7 +406,7 @@ mv  MQOM2-L5-gf256-fast-r3 Data
 make -f MQOMC5gf256Fr3make clean
 
 make -f MQOMC5gf256Fr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -414,7 +414,7 @@ mv  MQOM2-L5-gf256-fast-r5 Data
 make -f MQOMC5gf256Fr5make clean
 
 make -f MQOMC5gf256Sr5make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -422,7 +422,7 @@ mv  MQOM2-L5-gf256-short-r5 Data
 make -f MQOMC5gf256Sr5make clean
 
 make -f MQOMC5gf256Sr3make mqom-bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./mqom-bench
 done
@@ -433,7 +433,7 @@ make -f MQOMC5gf256Sr3make clean
 make -f PERK128F3make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-128-fast-3
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-128-fast-3-bench
 done
@@ -447,7 +447,7 @@ make -f PERK128F3make clean
 make -f PERK128F5make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-128-fast-5
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-128-fast-5-bench
 done
@@ -461,7 +461,7 @@ make -f PERK128F5make clean
 make -f PERK192F3make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-192-fast-3
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-192-fast-3-bench
 done
@@ -475,7 +475,7 @@ make -f PERK192F5make clean
 make -f PERK192F5make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-192-fast-5
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-192-fast-5-bench
 done
@@ -489,7 +489,7 @@ make -f PERK192F5make clean
 make -f PERK256F5make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-256-fast-5
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-256-fast-5-bench
 done
@@ -503,7 +503,7 @@ make -f PERK256F5make clean
 make -f PERK256F3make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-256-fast-3
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-256-fast-3-bench
 done
@@ -517,7 +517,7 @@ make -f PERK256F3make clean
 make -f PERK256S3make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-256-short-3
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-256-short-3-bench
 done
@@ -531,7 +531,7 @@ make -f PERK256S3make clean
 make -f PERK256S5make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-256-short-5
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-256-short-5-bench
 done
@@ -545,7 +545,7 @@ make -f PERK256S5make clean
 make -f PERK192S5make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-192-short-5
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-192-short-5-bench
 done
@@ -559,7 +559,7 @@ make -f PERK192S5make clean
 make -f PERK192S3make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-192-short-3
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-192-short-3-bench
 done
@@ -573,7 +573,7 @@ make -f PERK192S3make clean
 make -f PERK128S3make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-128-short-3
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-128-short-3-bench
 done
@@ -587,7 +587,7 @@ make -f PERK128S3make clean
 make -f PERK128S5make perk-bench
 cd ..
 cd perk/Optimized_Implementation/perk-128-short-5
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./build/bin/perk-128-short-5-bench
 done
@@ -601,7 +601,7 @@ make -f PERK128S5make clean
 #QRUOV Variants
 
 make -f QRUOV1q7L10Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -609,7 +609,7 @@ make -f QRUOV1q7L10Vmake clean
 mv qruov1q7L10v740m100avx2a Data
 
 make -f QRUOV1q7L10Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -617,7 +617,7 @@ make -f QRUOV1q7L10Vsmake clean
 mv qruov1q7L10v740m100portable64s Data
 
 make -f QRUOV1q127L3Vmake bench_qruov
-for ((i=0; i<1; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -625,7 +625,7 @@ make -f QRUOV1q127L3Vmake clean
 mv qruov1q127L3v156m54portable64a Data
 
 make -f QRUOV1q31L3Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -633,7 +633,7 @@ make -f QRUOV1q31L3Vsmake clean
 mv qruov1q31L3v165m60portable64s Data
 
 make -f QRUOV1q31L3Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -641,7 +641,7 @@ make -f QRUOV1q31L3Vmake clean
 mv qruov1q31L3v165m60portable64a Data
 
 make -f QRUOV1q127L3Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -649,7 +649,7 @@ make -f QRUOV1q127L3Vsmake clean
 mv qruov1q127L3v156m54portable64s Data
 
 make -f QRUOV1q31L10Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -657,7 +657,7 @@ make -f QRUOV1q31L10Vsmake clean
 mv qruov1q31L10v600m70portable64s Data
 
 make -f QRUOV1q31L10Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -665,7 +665,7 @@ make -f QRUOV1q31L10Vmake clean
 mv qruov1q31L10v600m70portable64a Data
 
 make -f QRUOV3q31L10Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -673,7 +673,7 @@ make -f QRUOV3q31L10Vsmake clean
 mv qruov3q31L10v890m100portable64s Data
 
 make -f QRUOV3q31L10Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -681,7 +681,7 @@ make -f QRUOV3q31L10Vmake clean
 mv qruov3q31L10v890m100portable64a Data
 
 make -f QRUOV5q31L10Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -689,7 +689,7 @@ make -f QRUOV5q31L10Vsmake clean
 mv qruov5q31L10v1120m120portable64s Data
 
 make -f QRUOV3q31L3Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -697,7 +697,7 @@ make -f QRUOV3q31L3Vmake clean
 mv qruov3q31L3v246m87portable64a Data
 
 make -f QRUOV3q31L3Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -705,7 +705,7 @@ make -f QRUOV3q31L3Vsmake clean
 mv qruov3q31L3v246m87portable64s Data
 
 make -f QRUOV3q127L3Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -713,7 +713,7 @@ make -f QRUOV3q127L3Vmake clean
 mv qruov3q127L3v228m78portable64a Data
 
 make -f QRUOV3q127L3Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -721,7 +721,7 @@ make -f QRUOV3q127L3Vsmake clean
 mv qruov3q127L3v228m78portable64s Data
 
 make -f QRUOV3q7L10Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -729,7 +729,7 @@ make -f QRUOV3q7L10Vmake clean
 mv qruov3q7L10v1100m140portable64a Data
 
 make -f QRUOV3q7L10Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -737,7 +737,7 @@ make -f QRUOV3q7L10Vsmake clean
 mv qruov3q7L10v1100m140portable64s Data
 
 make -f QRUOV5q7L10Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -745,7 +745,7 @@ make -f QRUOV5q7L10Vmake clean
 mv qruov5q7L10v1490m190portable64a Data
 
 make -f QRUOV5q7L10Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -753,7 +753,7 @@ make -f QRUOV5q7L10Vsmake clean
 mv qruov5q7L10v1490m190portable64s Data
 
 make -f QRUOV5q31L3Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -761,7 +761,7 @@ make -f QRUOV5q31L3Vsmake clean
 mv qruov5q31L3v324m114portable64s Data
 
 make -f QRUOV5q31L3Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -769,7 +769,7 @@ make -f QRUOV5q31L3Vmake clean
 mv qruov5q31L3v324m114portable64a Data
 
 make -f QRUOV5q31L10Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -777,7 +777,7 @@ make -f QRUOV5q31L10Vmake clean
 mv qruov5q31L10v1120m120portable64a Data
 
 make -f QRUOV5q127L3Vmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -785,7 +785,7 @@ make -f QRUOV5q127L3Vmake clean
 mv qruov5q127L3v306m105portable64a Data
 
 make -f QRUOV5q127L3Vsmake bench_qruov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
@@ -793,10 +793,10 @@ make -f QRUOV5q127L3Vsmake clean
 mv qruov5q127L3v306m105portable64s Data
 
 #RYDE Variants
-make -f RYDE1Smake ryde1f-bench
+make -f RYDE1Fmake ryde1f-bench
 cd ..
 cd ryde/Optimized_Implementation/ryde1f
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/ryde1f-bench
 done
@@ -808,7 +808,7 @@ sudo mv ../ryde/Optimized_Implementation/ryde1f/RYDE-1F Data
 make -f RYDE1Smake ryde1s-bench
 cd ..
 cd ryde/Optimized_Implementation/ryde1s
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/ryde1s-bench
 done
@@ -820,7 +820,7 @@ sudo mv ../ryde/Optimized_Implementation/ryde1s/RYDE-1S Data
 make -f RYDE3Fmake ryde3f-bench
 cd ..
 cd ryde/Optimized_Implementation/ryde3f
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/ryde3f-bench
 done
@@ -832,7 +832,7 @@ sudo mv ../ryde/Optimized_Implementation/ryde3f/RYDE-3F Data
 make -f RYDE3Smake ryde3s-bench
 cd ..
 cd ryde/Optimized_Implementation/ryde3s
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/ryde3s-bench
 done
@@ -844,7 +844,7 @@ sudo mv ../ryde/Optimized_Implementation/ryde3s/RYDE-3S Data
 make -f RYDE5Fmake ryde5f-bench
 cd ..
 cd ryde/Optimized_Implementation/ryde5f
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/ryde5f-bench
 done
@@ -856,7 +856,7 @@ sudo mv ../ryde/Optimized_Implementation/ryde5f/RYDE-5F Data
 make -f RYDE5Smake ryde5s-bench
 cd ..
 cd ryde/Optimized_Implementation/ryde5s
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/ryde5s-bench
 done
@@ -875,7 +875,7 @@ cd TestingCode
 
 make -f SNOVA_24_4_SSKmake 
 make -f SNOVA_24_4_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -884,7 +884,7 @@ mv SNOVA_24_5_4_SSK Data
 
 make -f SNOVA24_4_SHAKE_ESKmake 
 make -f SNOVA24_4_SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -893,7 +893,7 @@ mv SNOVA_24_5_4_SHAKE_ESK Data
 
 make -f SNOVA24_4_SHAKE_SSKmake 
 make -f SNOVA24_4_SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -902,7 +902,7 @@ mv SNOVA_24_5_4_SHAKE_SSK Data
 
 make -f SNOVA24_4ESKmake 
 make -f SNOVA24_4ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -911,7 +911,7 @@ mv SNOVA_24_5_4 Data
 
 make -f SNOVA24_5ESKmake 
 make -f SNOVA24_5ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -920,7 +920,7 @@ mv SNOVA_24_5_5_ESK Data
 
 make -f SNOVA24_5SHAKE_ESK
 make -f SNOVA24_5SHAKE_ESK bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -929,7 +929,7 @@ mv SNOVA_24_5_5_SHAKE_ESK Data
 
 make -f SNOVA24_5SHAKE_SSKmake
 make -f SNOVA24_5SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -938,7 +938,7 @@ mv SNOVA_24_5_5_SHAKE_SSK Data
 
 make -f SNOVA24_5SSKmake
 make -f SNOVA24_5SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -947,7 +947,7 @@ mv SNOVA_24_5_5_SSK Data
 
 make -f SNOVA24_5ESKmake
 make -f SNOVA24_5ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -956,7 +956,7 @@ mv SNOVA_24_5_5_ESK Data
 
 make -f SNOVA25_3ESKmake
 make -f SNOVA25_3ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -965,7 +965,7 @@ mv SNOVA_25_8_3_ESK Data
 
 make -f SNOVA25_3SHAKE_ESKmake
 make -f SNOVA25_3SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -974,7 +974,7 @@ mv SNOVA_25_8_3_SHAKE_ESK Data
 
 make -f SNOVA25_3SHAKE_SSKmake
 make -f SNOVA25_3SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -983,7 +983,7 @@ mv SNOVA_25_8_3_SHAKE_SSK Data
 
 make -f SNOVA25_3SSKmake
 make -f SNOVA25_3SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -992,7 +992,7 @@ mv SNOVA_25_8_3_SSK Data
 
 make -f SNOVA29_5ESKmake
 make -f SNOVA29_5ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1001,7 +1001,7 @@ mv SNOVA_29_6_5_ESK Data
 
 make -f SNOVA29_5SHAKE_ESKmake
 make -f SNOVA29_5SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1010,7 +1010,7 @@ mv SNOVA_29_6_5_SHAKE_ESK Data
 
 make -f SNOVA29_5SHAKE_SSKmake
 make -f SNOVA29_5SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1019,16 +1019,25 @@ mv SNOVA_29_6_5_SHAKE_SSK Data
 
 make -f SNOVA29_5SSKmake
 make -f SNOVA29_5SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
 make -f SNOVA29_5SSKmake clean
 mv SNOVA_29_6_5_SSK Data
 
+make -f SNOVA37_2ESKmake
+make -f SNOVA37_2ESKmake bench_snova
+for ((i=0; i<1000; i++))
+do
+    ./bench_snova
+done
+make -f SNOVA37_2ESKmake clean
+mv SNOVA_37_17_2_ESK Data
+
 make -f SNOVA37_2SHAKE_ESKmake
 make -f SNOVA37_2SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1037,7 +1046,7 @@ mv SNOVA_37_17_2_SHAKE_ESK Data
 
 make -f SNOVA37_2SHAKE_SSKmake
 make -f SNOVA37_2SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1046,7 +1055,7 @@ mv SNOVA_37_17_2_SHAKE_SSK Data
 
 make -f SNOVA37_2SSKmake
 make -f SNOVA37_2SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1055,7 +1064,7 @@ mv SNOVA_37_17_2_SSK Data
 
 make -f SNOVA37_4ESKmake
 make -f SNOVA37_4ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1064,7 +1073,7 @@ mv SNOVA_37_8_4_ESK Data
 
 make -f SNOVA37_4SHAKE_ESKmake
 make -f SNOVA37_4SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1073,7 +1082,7 @@ mv SNOVA_37_8_4_SHAKE_ESK Data
 
 make -f SNOVA37_4SHAKE_SSKmake
 make -f SNOVA37_4SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1082,7 +1091,7 @@ mv SNOVA_37_8_4_SHAKE_SSK Data
 
 make -f SNOVA37_4SSKmake
 make -f SNOVA37_4SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1091,7 +1100,7 @@ mv SNOVA_37_8_4_SSK Data
 
 make -f SNOVA49_3ESKmake
 make -f SNOVA49_3ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1100,7 +1109,7 @@ mv SNOVA_49_11_3_ESK Data
 
 make -f SNOVA49_3SHAKE_ESKmake
 make -f SNOVA49_3SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1109,7 +1118,7 @@ mv SNOVA_49_11_3_SHAKE_ESK Data
 
 make -f SNOVA49_3SHAKE_SSKmake
 make -f SNOVA49_3SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1118,7 +1127,7 @@ mv SNOVA_49_11_3_SHAKE_SSK Data
 
 make -f SNOVA49_3SSKmake
 make -f SNOVA49_3SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1127,7 +1136,7 @@ mv SNOVA_49_11_3_SSK Data
 
 make -f SNOVA56_2ESKmake
 make -f SNOVA56_2ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1136,7 +1145,7 @@ mv SNOVA_56_25_2_ESK Data
 
 make -f SNOVA56_2SHAKE_ESKmake
 make -f SNOVA56_2SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1145,7 +1154,7 @@ mv SNOVA_56_25_2_SHAKE_ESK Data
 
 make -f SNOVA56_2SHAKE_SSKmake
 make -f SNOVA56_2SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1154,7 +1163,7 @@ mv SNOVA_56_25_2_SHAKE_SSK Data
 
 make -f SNOVA56_2SSKmake
 make -f SNOVA56_2SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1163,7 +1172,7 @@ mv SNOVA_56_25_2_SSK Data
 
 make -f SNOVA60_4ESKmake
 make -f SNOVA60_4ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1172,7 +1181,7 @@ mv SNOVA_60_10_4_ESK Data
 
 make -f SNOVA60_4SHAKE_ESKmake
 make -f SNOVA60_4SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1181,7 +1190,7 @@ mv SNOVA_60_10_4_SHAKE_ESK Data
 
 make -f SNOVA60_4SHAKE_SSKmake
 make -f SNOVA60_4SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1190,7 +1199,7 @@ mv SNOVA_60_10_4_SHAKE_SSK Data
 
 make -f SNOVA60_4SSKmake
 make -f SNOVA60_4SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1199,7 +1208,7 @@ mv SNOVA_60_10_4_SSK Data
 
 make -f SNOVA66_3ESKmake
 make -f SNOVA66_3ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1208,7 +1217,7 @@ mv SNOVA_66_15_3_ESK Data
 
 make -f SNOVA66_3SHAKE_ESKmake
 make -f SNOVA66_3SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1217,7 +1226,7 @@ mv SNOVA_66_15_3_SHAKE_ESK Data
 
 make -f SNOVA66_3SHAKE_SSKmake
 make -f SNOVA66_3SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1226,7 +1235,7 @@ mv SNOVA_66_15_3_SHAKE_SSK Data
 
 make -f SNOVA66_3SSKmake
 make -f SNOVA66_3SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1235,7 +1244,7 @@ mv SNOVA_66_15_3_SSK Data
 
 make -f SNOVA75_2ESKmake
 make -f SNOVA75_2ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1244,7 +1253,7 @@ mv SNOVA_75_33_2_ESK Data
 
 make -f SNOVA75_2SHAKE_ESKmake
 make -f SNOVA75_2SHAKE_ESKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1253,7 +1262,7 @@ mv SNOVA_75_33_2_SHAKE_ESK Data
 
 make -f SNOVA75_2SHAKE_SSKmake
 make -f SNOVA75_2SHAKE_SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1262,7 +1271,7 @@ mv SNOVA_75_33_2_SHAKE_SSK Data
 
 make -f SNOVA75_2SSKmake
 make -f SNOVA75_2SSKmake bench_snova
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_snova
 done
@@ -1272,7 +1281,7 @@ mv SNOVA_75_33_2_SSK Data
 #UOV Variants
 
 make -f UOVIIImake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1280,7 +1289,7 @@ make -f UOVIIImake clean
 mv 'OV(256,184,72)-classic' Data
 
 make -f UOVIIIPKCmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1288,7 +1297,7 @@ make -f UOVIIIPKCmake clean
 mv 'OV(256,184,72)-pkc' Data
 
 make -f UOVIIISKCPKCmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1296,7 +1305,7 @@ make -f UOVIIISKCPKCmake clean
 mv 'OV(256,184,72)-pkc-skc' Data
 
 make -f UOVIpmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1304,7 +1313,7 @@ make -f UOVIpmake clean
 mv 'OV(256,112,44)-classic' Data
 
 make -f UOVIpPKCmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1312,7 +1321,7 @@ make -f UOVIpPKCmake clean
 mv 'OV(256,112,44)-pkc' Data
 
 make -f UOVIpSKCPKCmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1320,7 +1329,7 @@ make -f UOVIpSKCPKCmake clean
 mv 'OV(256,112,44)-pkc-skc' Data
 
 make -f UOVIsmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1328,7 +1337,7 @@ make -f UOVIsmake clean
 mv 'OV(16,160,64)-classic' Data
 
 make -f UOVIsPKCmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1336,7 +1345,7 @@ make -f UOVIsPKCmake clean
 mv 'OV(16,160,64)-pkc' Data
 
 make -f UOVlsSKCPKCmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1344,7 +1353,7 @@ make -f UOVlsSKCPKCmake clean
 mv 'OV(16,160,64)-pkc-skc' Data
 
 make -f UOVVmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1352,7 +1361,7 @@ make -f UOVVmake clean
 mv 'OV(256,244,96)-classic' Data
 
 make -f UOVVPKCmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1360,7 +1369,7 @@ make -f UOVVPKCmake clean
 mv 'OV(256,244,96)-pkc' Data
 
 make -f UOVVSKCPKCmake bench_uov
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_uov
 done
@@ -1376,7 +1385,7 @@ cmake -DSQISIGN_BUILD_TYPE=opt -DCMAKE_BUILD_TYPE=Release ..
 
 cd apps
 make benchmark_lvl1
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./benchmark_lvl1
 done
@@ -1388,7 +1397,7 @@ sudo mv ../SQIsign/build/apps/SQIsign_lvl1 Data
 cd ..
 cd SQIsign/build/apps
 make benchmark_lvl3
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./benchmark_lvl3
 done
@@ -1400,7 +1409,7 @@ sudo mv ../SQIsign/build/apps/SQIsign_lvl3 Data
 cd ..
 cd SQIsign/build/apps
 make benchmark_lvl5
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./benchmark_lvl5
 done
@@ -1418,7 +1427,7 @@ cd SDitH-v2/Optimized_Implementation/sdith_cat1_fast
 cmake CMakeLists.txt
 cd generator
 make bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench
 done
@@ -1432,7 +1441,7 @@ cd SDitH-v2/Optimized_Implementation/sdith_cat1_short
 cmake CMakeLists.txt
 cd generator
 make bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench
 done
@@ -1446,7 +1455,7 @@ cd SDitH-v2/Optimized_Implementation/sdith_cat3_short
 cmake CMakeLists.txt
 cd generator
 make bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench
 done
@@ -1460,7 +1469,7 @@ cd SDitH-v2/Optimized_Implementation/sdith_cat3_fast
 cmake CMakeLists.txt
 cd generator
 make bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench
 done
@@ -1474,7 +1483,7 @@ cd SDitH-v2/Optimized_Implementation/sdith_cat5_fast
 cmake CMakeLists.txt
 cd generator
 make bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench
 done
@@ -1488,7 +1497,7 @@ cd SDitH-v2/Optimized_Implementation/sdith_cat5_short
 cmake CMakeLists.txt
 cd generator
 make bench
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench
 done
@@ -1502,7 +1511,7 @@ cd ..
 cd MAYO/Optimized_Implementation
 cmake CMakeLists.txt
 make bench_mayo_1
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./apps/bench_mayo_1
 done
@@ -1515,7 +1524,7 @@ cd ..
 cd MAYO/Optimized_Implementation
 cmake CMakeLists.txt
 make bench_mayo_2
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./apps/bench_mayo_2
 done
@@ -1528,7 +1537,7 @@ cd ..
 cd MAYO/Optimized_Implementation
 cmake CMakeLists.txt
 make bench_mayo_3
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./apps/bench_mayo_3
 done
@@ -1541,7 +1550,7 @@ cd ..
 cd MAYO/Optimized_Implementation
 cmake CMakeLists.txt
 make bench_mayo_5
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./apps/bench_mayo_5
 done
@@ -1557,7 +1566,7 @@ cd ..
 cd LESS/Optimized_Implementation/avx2
 cmake CMakeLists.txt
 make bench_LESS_252_192
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_LESS_252_192
 done
@@ -1571,7 +1580,7 @@ cd ..
 cd LESS/Optimized_Implementation/avx2
 cmake CMakeLists.txt
 make bench_LESS_252_68
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_LESS_252_68
 done
@@ -1585,7 +1594,7 @@ cd ..
 cd LESS/Optimized_Implementation/avx2
 cmake CMakeLists.txt
 make bench_LESS_252_45
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_LESS_252_45
 done
@@ -1599,7 +1608,7 @@ cd ..
 cd LESS/Optimized_Implementation/avx2
 cmake CMakeLists.txt
 make bench_LESS_400_220
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_LESS_400_220
 done
@@ -1613,7 +1622,7 @@ cd ..
 cd LESS/Optimized_Implementation/avx2
 cmake CMakeLists.txt
 make bench_LESS_400_102
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_LESS_400_102
 done
@@ -1627,7 +1636,7 @@ cd ..
 cd LESS/Optimized_Implementation/avx2
 cmake CMakeLists.txt
 make bench_LESS_548_345
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_LESS_548_345
 done
@@ -1641,7 +1650,7 @@ cd ..
 cd LESS/Optimized_Implementation/avx2
 cmake CMakeLists.txt
 make bench_LESS_548_137
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bench_LESS_548_137
 done
@@ -1657,7 +1666,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_1_RSDP_SIG_SIZE
-for ((i=0; i<1; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_1_RSDP_SIG_SIZE
 done
@@ -1671,7 +1680,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_1_RSDP_BALANCED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_1_RSDP_BALANCED
 done
@@ -1685,7 +1694,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_1_RSDP_SPEED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_1_RSDP_SPEED
 done
@@ -1699,7 +1708,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_1_RSDPG_SPEED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_1_RSDPG_SPEED
 done
@@ -1713,7 +1722,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_1_RSDPG_BALANCED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_1_RSDPG_BALANCED
 done
@@ -1727,7 +1736,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_1_RSDPG_SIG_SIZE
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_1_RSDPG_SIG_SIZE
 done
@@ -1741,7 +1750,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_3_RSDPG_SIG_SIZE
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_3_RSDPG_SIG_SIZE
 done
@@ -1755,7 +1764,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_3_RSDP_SIG_SIZE
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_3_RSDP_SIG_SIZE
 done
@@ -1769,7 +1778,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_3_RSDP_BALANCED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_3_RSDP_BALANCED
 done
@@ -1783,7 +1792,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_3_RSDPG_BALANCED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_3_RSDPG_BALANCED
 done
@@ -1797,7 +1806,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_3_RSDPG_SPEED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_3_RSDPG_SPEED
 done
@@ -1811,7 +1820,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_3_RSDP_SPEED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_3_RSDP_SPEED
 done
@@ -1825,7 +1834,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_5_RSDP_SPEED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_5_RSDP_SPEED
 done
@@ -1839,7 +1848,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_5_RSDPG_SPEED
-for ((i=0; i<1; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_5_RSDPG_SPEED
 done
@@ -1853,7 +1862,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_5_RSDPG_BALANCED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_5_RSDPG_BALANCED
 done
@@ -1867,7 +1876,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_5_RSDP_BALANCED
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_5_RSDP_BALANCED
 done
@@ -1881,7 +1890,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_5_RSDP_SIG_SIZE
-for ((i=0; i<1; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_5_RSDP_SIG_SIZE
 done
@@ -1895,7 +1904,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_5_RSDPG_SIG_SIZE
-for ((i=0; i<2; i++))
+for ((i=0; i<1000; i++))
 do
     ./bin/bench_CROSS_5_RSDPG_SIG_SIZE
 done
