@@ -133,7 +133,7 @@ mv ./Data/Mirath ./Data/MIRATH1AF
 make -f MIRATH1AF clean
 
 make -f MIRATH1AS bench_mirath
-for ((i=0; i<1000; i++))
+for ((i=0; i<1; i++))
 do
     ./bench_mirath
 done
@@ -600,13 +600,21 @@ make -f PERK128S5make clean
 
 #QRUOV Variants
 
+d ../QRUOV/Optimized_Implementation/
+make clean
+cd ../../TestingCode
+cd ../QRUOV/Optimized_Implementation/
+make
+cd ../../TestingCode
+
 make -f QRUOV1q7L10Vmake bench_qruov
 for ((i=0; i<1000; i++))
 do
     ./bench_qruov
 done
 make -f QRUOV1q7L10Vmake clean
-mv qruov1q7L10v740m100avx2a Data
+mv qruov1q7L10v740m100portable64a Data
+
 
 make -f QRUOV1q7L10Vsmake bench_qruov
 for ((i=0; i<1000; i++))
@@ -792,6 +800,10 @@ done
 make -f QRUOV5q127L3Vsmake clean
 mv qruov5q127L3v306m105portable64s Data
 
+cd ../QRUOV/Optimized_Implementation/
+make clean
+cd ../../TestingCode
+
 #RYDE Variants
 make -f RYDE1Fmake ryde1f-bench
 cd ..
@@ -907,7 +919,7 @@ do
     ./bench_snova
 done
 make -f SNOVA24_4ESKmake clean
-mv SNOVA_24_5_4 Data
+mv SNOVA_24_5_4_ESK Data
 
 make -f SNOVA24_5ESKmake 
 make -f SNOVA24_5ESKmake bench_snova
@@ -1666,7 +1678,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_1_RSDP_SIG_SIZE
-for ((i=0; i<1000; i++))
+for ((i=0; i<1; i++))
 do
     ./bin/bench_CROSS_1_RSDP_SIG_SIZE
 done
@@ -1848,7 +1860,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_5_RSDPG_SPEED
-for ((i=0; i<1000; i++))
+for ((i=0; i<1; i++))
 do
     ./bin/bench_CROSS_5_RSDPG_SPEED
 done
@@ -1890,7 +1902,7 @@ cd ..
 cd CROSS/Additional_Implementations/Benchmarking
 cmake CMakeLists.txt
 make bench_CROSS_5_RSDP_SIG_SIZE
-for ((i=0; i<1000; i++))
+for ((i=0; i<1; i++))
 do
     ./bin/bench_CROSS_5_RSDP_SIG_SIZE
 done
