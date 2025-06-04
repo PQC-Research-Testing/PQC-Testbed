@@ -1,2 +1,0 @@
-/home/ryane/PQC-Testbed/SQIsign/apps/CMakeFiles/edit_cache.dir
-/home/ryane/PQC-Testbed/SQIsign/apps/CMakeFiles/rebuild_cache.dir
