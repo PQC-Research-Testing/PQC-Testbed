@@ -18,7 +18,7 @@ else
 CFLAGS = -Wall -Wextra -Wpedantic -Wredundant-decls -Wshadow -Wpointer-arith -ftree-vectorize -O3 -march=$(ARCH) -mtune=$(ARCH)
 endif
 
-LOCALE = ../SNOVA/SNOVA_24_5_16_5_SHAKE_SSK/avx2
+LOCALE = ../SNOVA/Optimized_Implementation/SNOVA_24_5_16_5_SHAKE_SSK/opt
 BUILD_OUT_PATH = build/
 BUILD_LIBO_OUT_PATH = $(LOCALE)/build_libo
 

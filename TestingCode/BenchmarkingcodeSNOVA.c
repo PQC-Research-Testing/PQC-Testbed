@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <time.h>
 #include <sys/time.h>
-#include "../SNOVA/src/api.h"
+#include "../SNOVA/Optimized_Implementation/src/api.h"
 #include <sys/resource.h>
 #include <unistd.h>
 #include <sys/wait.h>

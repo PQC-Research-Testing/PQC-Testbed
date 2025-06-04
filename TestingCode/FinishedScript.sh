@@ -879,9 +879,9 @@ sudo mv ../ryde/Optimized_Implementation/ryde5s/RYDE-5S Data
 
 #SNOVA variants
 cd ..
-cd SNOVA
+cd SNOVA/Optimized_Implementation
 make
-cd ..
+cd ../..
 cd TestingCode
 
 
@@ -1289,6 +1289,7 @@ do
 done
 make -f SNOVA75_2SSKmake clean
 mv SNOVA_75_33_2_SSK Data
+
 
 #UOV Variants
 
