@@ -1,0 +1,68 @@
+LOCALE = ../SPHINCS+/Optimized_Implementation/crypto_sign/sphincs-shake256-128f-robust
+LDLIBS=-lcrypto
+CC = gcc
+CFLAGS = -Wall -Wextra -O3 -I$(LOCALE)
+
+HASH = shake256
+THASH = robust
+
+SOURCES = $(LOCALE)/address.c $(LOCALE)/rng.c $(LOCALE)/wots.c $(LOCALE)/utils.c $(LOCALE)/fors.c $(LOCALE)/sign.c $(LOCALE)/hash_$(HASH).c $(LOCALE)/thash_$(HASH)_$(THASH).c
+HEADERS = $(LOCALE)/params.h $(LOCALE)/address.h $(LOCALE)/rng.h $(LOCALE)/wots.h $(LOCALE)/utils.h $(LOCALE)/fors.h $(LOCALE)/api.h  $(LOCALE)/hash.h $(LOCALE)/thash.h
+
+ifeq ($(HASH),shake256)
+	SOURCES += $(LOCALE)/fips202.c
+	HEADERS += $(LOCALE)/fips202.h
+endif
+ifeq ($(HASH),haraka)
+	SOURCES += $(LOCALE)/haraka.c
+	HEADERS += $(LOCALE)/haraka.h
+endif
+ifeq ($(HASH),sha256)
+	SOURCES += $(LOCALE)/sha256.c
+	HEADERS += $(LOCALE)/sha256.h
+endif
+
+DET_SOURCES = $(SOURCES:$(LOCALE)/rng.%=$(LOCALE)/rng.%)
+DET_HEADERS = $(HEADERS:$(LOCALE)/rng.%=$(LOCALE)/rng.%)
+
+TESTS = $(LOCALE)/test/wots \
+		$(LOCALE)/test/fors \
+		$(LOCALE)/test/spx \
+
+BENCHMARK = AcceptedBenchmarking
+
+.PHONY: clean test benchmark
+
+default: PQCgenKAT_sign
+
+all: PQCgenKAT_sign tests benchmarks
+
+tests: $(TESTS)
+
+test: $(TESTS:=.exec)
+
+benchmarks: $(BENCHMARK)
+
+benchmark: $(BENCHMARK:=.exec)
+
+bench-SPHINCS: AcceptedBenchmarking.c $(SOURCES) $(HEADERS)
+	$(CC) $(CFLAGS) -o $@ $(SOURCES) $< $(LDLIBS)
+
+PQCgenKAT_sign: $(LOCALE)/PQCgenKAT_sign.c $(DET_SOURCES) $(DET_HEADERS)
+	$(CC) $(CFLAGS) -o $@ $(DET_SOURCES) $< -lcrypto
+
+test/%: $(LOCALE)/test/%.c $(SOURCES) $(HEADERS)
+	$(CC) $(CFLAGS) -o $@ $(SOURCES) $< $(LDLIBS)
+
+test/%.exec: $(LOCALE)/test/%
+	@$<
+
+clean:
+	-$(RM) $(LOCALE)/$(TESTS)
+	-$(RM) $(LOCALE)/$(BENCHMARK)
+	-$(RM) $(LOCALE)/PQCgenKAT_sign
+	-$(RM) $(LOCALE)/PQCsignKAT_*.rsp
+	-$(RM) $(LOCALE)/PQCsignKAT_*.req
+	-rm -f bench-SPHINCS
+	-rm -f PQCgenKAT_sign
+	

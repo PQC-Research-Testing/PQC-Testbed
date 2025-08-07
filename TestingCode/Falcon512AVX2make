@@ -1,0 +1,67 @@
+
+.POSIX:
+LOCALE = ../falcon-round3/Optimized_Implementation/falcon512/falcon512avx2
+CC = gcc
+CFLAGS = -W -Wall -O2 -mavx2 -I$(LOCALE)
+LD = gcc
+LDFLAGS = 
+LIBS = 
+OBJ1 = $(LOCALE)/build/codec.o $(LOCALE)/build/common.o $(LOCALE)/build/fft.o $(LOCALE)/build/fpr.o $(LOCALE)/build/keygen.o $(LOCALE)/build/nist.o $(LOCALE)/build/rng.o $(LOCALE)/build/shake.o $(LOCALE)/build/sign.o $(LOCALE)/build/vrfy.o $(LOCALE)/build/katrng.o $(LOCALE)/build/Benchmarkingcode.o
+
+BUILDList = build/codec.o build/common.o build/fft.o build/fpr.o build/keygen.o build/nist.o build/rng.o build/shake.o build/sign.o build/vrfy.o build/katrng.o build/Benchmarkingcode.o build/bench-falcon 
+
+HEAD1 = $(LOCALE)/api.h $(LOCALE)/fpr.h $(LOCALE)/inner.h
+HEAD2 = $(LOCALE)/api.h ../falcon-round3/KAT/generator/katrng.h
+
+all: build $(BUILDList)
+
+build:
+	-mkdir ../falcon-round3/Optimized_Implementation/falcon512/falcon512avx2/build
+
+clean:
+	-rm -f ../falcon-round3/Optimized_Implementation/falcon512/falcon512avx2/*.o
+	-rm -f ../falcon-round3/Optimized_Implementation/falcon512/falcon512avx2/bench-falcon
+	-sudo rm -r ../falcon-round3/Optimized_Implementation/falcon512/falcon512avx2/build
+
+
+build/Benchmarkingcode.o: AcceptedBenchmarking.c $(LOCALE)/api.h $(LOCALE)/rng.c
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/Benchmarkingcode.o AcceptedBenchmarking.c
+
+build/codec.o: $(LOCALE)/codec.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/codec.o $(LOCALE)/codec.c
+
+build/common.o: $(LOCALE)/common.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/common.o $(LOCALE)/common.c
+
+build/fft.o: $(LOCALE)/fft.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/fft.o $(LOCALE)/fft.c
+
+build/fpr.o: $(LOCALE)/fpr.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/fpr.o $(LOCALE)/fpr.c
+
+build/keygen.o: $(LOCALE)/keygen.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/keygen.o $(LOCALE)/keygen.c
+
+build/nist.o: $(LOCALE)/nist.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/nist.o $(LOCALE)/nist.c
+
+build/rng.o: $(LOCALE)/rng.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/rng.o $(LOCALE)/rng.c
+
+build/shake.o: $(LOCALE)/shake.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/shake.o $(LOCALE)/shake.c
+
+build/sign.o: $(LOCALE)/sign.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/sign.o $(LOCALE)/sign.c
+
+build/vrfy.o: $(LOCALE)/vrfy.c $(HEAD1)
+	$(CC) $(CFLAGS) -c -o $(LOCALE)/build/vrfy.o $(LOCALE)/vrfy.c
+
+build/PQCgenKAT_sign.o: ../falcon-round3/KAT/generator/PQCgenKAT_sign.c $(HEAD2)
+	$(CC) $(CFLAGS) -I . -DALGNAME=falcon512avx2 -c -o $(LOCALE)/build/PQCgenKAT_sign.o ../falcon-round3/KAT/generator/PQCgenKAT_sign.c
+
+build/katrng.o: ../falcon-round3/KAT/generator/katrng.c $(HEAD2)
+	$(CC) $(CFLAGS) -I . -c -o $(LOCALE)/build/katrng.o ../falcon-round3/KAT/generator/katrng.c
+
+build/bench-falcon: $(OBJ1) 
+	$(LD) $(LDFLAGS) -o $(LOCALE)/build/bench-falcon $(OBJ1) $(LIBS)

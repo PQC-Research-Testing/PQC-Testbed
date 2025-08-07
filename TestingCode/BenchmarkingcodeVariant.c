@@ -64,6 +64,9 @@ main(void)
     res = crypto_sign_keypair(pk, sk);
     after = GetCC();
     gettimeofday(&et, NULL);
+    if(res!=0){
+    printf("Error during key-generation operation detected.");
+   }
     timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
     printf("Time elapsed: %lu microseconds\n", timeElapsed);
@@ -78,6 +81,9 @@ main(void)
     res = crypto_sign(sm, &smlen, msg, msglen, sk);
     after = GetCC();
     gettimeofday(&et, NULL);
+    if(res!=0){
+    printf("Error during signing operation detected.");
+   }
     timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
     printf("Time elapsed: %lu microseconds\n", timeElapsed);
@@ -88,6 +94,9 @@ main(void)
     res = crypto_sign_open(msg2, &msglen, sm, smlen, pk);
     after = GetCC();
     gettimeofday(&et, NULL);
+    if(res!=0){
+    printf("Error during verification operation detected.");
+   }
     timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
     printf("Time elapsed: %lu microseconds\n", timeElapsed);
