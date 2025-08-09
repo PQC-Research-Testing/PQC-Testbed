@@ -4,7 +4,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O3 -I$(LOCALE)
 
 HASH = haraka
-THASH = simple
+THASH = robust
 
 SOURCES = $(LOCALE)/address.c $(LOCALE)/rng.c $(LOCALE)/wots.c $(LOCALE)/utils.c $(LOCALE)/fors.c $(LOCALE)/sign.c $(LOCALE)/hash_$(HASH).c $(LOCALE)/thash_$(HASH)_$(THASH).c
 HEADERS = $(LOCALE)/params.h $(LOCALE)/address.h $(LOCALE)/rng.h $(LOCALE)/wots.h $(LOCALE)/utils.h $(LOCALE)/fors.h $(LOCALE)/api.h  $(LOCALE)/hash.h $(LOCALE)/thash.h
