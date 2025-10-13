@@ -1,20 +1,20 @@
 /** 
- * @file ryde_3f_parsing.h
- * @brief Functions to parse secret key, public key, commitment, and response of the SIGN-RSD_MPC_ONE scheme
+ * @file parsing.h
+ * @brief Functions to parse secret key and public key of the RYDE signature scheme
  */
 
-#ifndef RYDE_3F_PARSING_H
-#define RYDE_3F_PARSING_H
-
-#include "rbc_61_vec.h"
-#include "rbc_61_mat.h"
-#include "rbc_61_mat_fq.h"
-
-void ryde_3f_public_key_to_string(uint8_t* pk, const uint8_t* pk_seed, const rbc_61_vec y);
-void ryde_3f_public_key_from_string(rbc_61_mat H, rbc_61_vec y, const uint8_t* pk);
-
-void ryde_3f_secret_key_to_string(uint8_t* sk, const uint8_t* sk_seed, const uint8_t* pk_seed);
-void ryde_3f_secret_key_from_string(rbc_61_vec y, rbc_61_mat H, rbc_61_vec s, rbc_61_mat_fq C, const uint8_t* sk);
-
-#endif
-
+ #ifndef RYDE_PARSING_H
+ #define RYDE_PARSING_H
+ 
+ #include "field_matrix.h"
+ #include "binary_matrix.h"
+ 
+ void ryde_public_key_to_string(uint8_t* pk, const uint8_t* pk_seed, const field_vector_t *y);
+ void ryde_public_key_from_string(field_matrix_t *H, field_vector_t *y, const uint8_t* pk);
+ 
+ void ryde_secret_key_to_string(uint8_t* sk, const uint8_t* sk_seed, const uint8_t* pk_seed);
+ void ryde_secret_key_from_string(field_vector_t *y, field_matrix_t *H, field_vector_t *s, binary_matrix_t *C, const uint8_t* sk);
+ 
+ #endif //RYDE_PARSING_H
+ 
+ 
