@@ -2,7 +2,7 @@ from mqom import MQOM2Parameters, MQOM2, Category, TradeOff, Variant
 from labels import get_label
 
 for cat in [Category.I, Category.III, Category.V]:
-    for field_size in [2, 256]:
+    for field_size in [2, 16, 256]:
         for trade_off in [TradeOff.SHORT, TradeOff.FAST]:
             for variant in [Variant.R5, Variant.R3]:
 

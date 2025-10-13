@@ -72,7 +72,7 @@ seedexpander(AES_XOF_struct *ctx, unsigned char *x, unsigned long xlen)
 
     offset = 0;
     while ( xlen > 0 ) {
-        if ( xlen <= (16-ctx->buffer_pos) ) { // buffer has what we need
+        if ( (int)xlen <= (16-ctx->buffer_pos) ) { // buffer has what we need
             memcpy(x+offset, ctx->buffer+ctx->buffer_pos, xlen);
             ctx->buffer_pos += xlen;
 
@@ -134,6 +134,7 @@ AES256_ECB(unsigned char *key, unsigned char *ctr, unsigned char *buffer)
 
     /* Clean up */
     EVP_CIPHER_CTX_free(ctx);
+    (void)ciphertext_len;
 }
 
 void
@@ -151,6 +152,7 @@ randombytes_init(unsigned char *entropy_input,
     memset(DRBG_ctx.V, 0x00, 16);
     AES256_CTR_DRBG_Update(seed_material, DRBG_ctx.Key, DRBG_ctx.V);
     DRBG_ctx.reseed_counter = 1;
+    (void)security_strength;
 }
 
 int

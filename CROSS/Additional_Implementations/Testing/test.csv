@@ -1,0 +1,6 @@
+test_name,test_type,ignored_parameters,description
+test_basic,c,,"run keygen, sign, open on random messages"
+test_bitflip,c,,"sign a random message, flip the bits of the signature one at a time, check that the resulting signature is invalid"
+test_endianness,sh,all,"check that a big-endian architecture produces the same KAT as a little-endian one"
+test_kat,sh,all,"check that the reference and the optimized implementations produce the same KAT"
+test_parameters,c,,"print parameters like P, lambda, secret key lenght, etc."

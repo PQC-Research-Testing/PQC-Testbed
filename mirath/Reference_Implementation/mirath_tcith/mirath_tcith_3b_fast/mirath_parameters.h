@@ -1,26 +1,37 @@
-/**
- * \file parameters.h
- * \brief Parameters of the MIRATH scheme
- */
+#ifndef MIRATH_TCITH_PARAM_3B_FAST_H
+#define MIRATH_TCITH_PARAM_3B_FAST_H
 
-#ifndef MIRATH_PARAMETER_H
-#define MIRATH_PARAMETER_H
+#define MIRATH_SECURITY 192                       /**< Expected security level (bits) >*/
+#define MIRATH_SECURITY_BYTES 24                  /**< Expected security level (bytes) >*/
 
-#include "mirath_param_192b.h"
+#define MIRATH_PARAM_SALT_BYTES 48                /**< Expected salt (bytes) >*/
 
-#define DOMAIN_SEPARATOR_MESSAGE 0
-#define DOMAIN_SEPARATOR_HASH1 1
-#define DOMAIN_SEPARATOR_HASH2_PARTIAL 2
-#define DOMAIN_SEPARATOR_HASH2 3
-#define DOMAIN_SEPARATOR_TREE 4
-#define DOMAIN_SEPARATOR_COMMITMENT 5
+#define MIRATH_SECRET_KEY_BYTES 48                /**< Secret key size >*/
+#define MIRATH_PUBLIC_KEY_BYTES 84                /**< Public key size >*/
+#define MIRATH_SIGNATURE_BYTES 7924               /**< Signature size >*/
 
-#define MIRATH_VAR_GAMMA (MIRATH_PARAM_RHO * (MIRATH_PARAM_M * MIRATH_PARAM_N - MIRATH_PARAM_K))
-#define MIRATH_VAR_S (MIRATH_PARAM_M * MIRATH_PARAM_R)
-#define MIRATH_VAR_C (MIRATH_PARAM_R * (MIRATH_PARAM_N - MIRATH_PARAM_R))
-#define MIRATH_VAR_BASE_MID (MIRATH_PARAM_M * (MIRATH_PARAM_N - MIRATH_PARAM_R))
-#define MIRATH_VAR_E_A (MIRATH_PARAM_M * MIRATH_PARAM_N - MIRATH_PARAM_K)
-#define MIRATH_VAR_T (MIRATH_PARAM_M * MIRATH_PARAM_N)
+#define MIRATH_PARAM_Q 2                          /**< Parameter q of the scheme (finite field GF(q^m)) >*/
+#define MIRATH_PARAM_Q_BITS 1
+#define MIRATH_PARAM_M 50                         /**< Parameter m of the scheme (finite field GF(q^m)) >*/
+#define MIRATH_PARAM_K 2024                       /**< Parameter k of the scheme (code dimension) >*/
+#define MIRATH_PARAM_N 50                         /**< Parameter n of the scheme (code length) >*/
+#define MIRATH_PARAM_R 5                          /**< Parameter r of the scheme (rank of vectors) >*/
 
-#endif
+#define MIRATH_PARAM_N_1 256                      /**< Parameter N_1 of the scheme >*/
+#define MIRATH_PARAM_N_2 256                      /**< Parameter N_2 of the scheme >*/
+#define MIRATH_PARAM_N_1_BITS 8                   /**< Parameter N_1 (bits) >*/
+#define MIRATH_PARAM_N_1_BYTES 1                  /**< Parameter N_1 (bytes) >*/
+#define MIRATH_PARAM_N_1_MASK 0xff                /**< Parameter N_1 (mask) >*/
+#define MIRATH_PARAM_TAU 27                       /**< Parameter tau of the scheme (number of iterations) >*/
+#define MIRATH_PARAM_TAU_1 27                     /**< Parameter tau_1 of the scheme (iterations concerning N1) >*/
+#define MIRATH_PARAM_RHO 24                       /**< Parameter rho of the scheme (dimension of the extension) >*/
+#define MIRATH_PARAM_MU 8                         /**< Parameter mu of the scheme >*/
 
+#define MIRATH_PARAM_TREE_LEAVES 6912             /**< Number of leaves in the tree >*/
+
+#define MIRATH_PARAM_CHALLENGE_2_BYTES 27         /**< Number of bytes required to store the second challenge >*/
+#define MIRATH_PARAM_HASH_2_MASK_BYTES 1          /**< Number of bytes in the second hash to be zero >*/
+#define MIRATH_PARAM_HASH_2_MASK 0xe0             /**< Mask for the most significant byte in the second hash >*/
+#define MIRATH_PARAM_T_OPEN 178                   /**< Maximum sibling path length allowed >*/
+
+#endif //MIRATH_TCITH_PARAM_3B_FAST_H

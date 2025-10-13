@@ -1,0 +1,13 @@
+CROSS testing utility
+
+Usage:
+    python3 test.py [options]
+
+To see all the available options run:
+    python3 test.py -h
+
+For example:
+    python3 test.py test=test_basic category=1 implementation=optimized
+runs test_basic on the optimized implementation of all CROSS-1 variants, while:
+    python3 test.py problem=RSDPG category=5 target=fast
+runs all available tests on both implementations of CROSS-RSDPG-5-fast.

@@ -26,7 +26,6 @@ $(EXECUTABLE_APITEST): $(EXECUTABLE_APITEST).c.o $(LIBFAEST) randomness.c.o
 $(EXECUTABLE_NISTKAT): $(addsuffix .o, $(NISTKAT_SOURCES)) $(LIBFAEST) randomness.c
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $^ -lcrypto -o $@
 
-
 clean:
 	rm -f \
 		$(wildcard *.o) \

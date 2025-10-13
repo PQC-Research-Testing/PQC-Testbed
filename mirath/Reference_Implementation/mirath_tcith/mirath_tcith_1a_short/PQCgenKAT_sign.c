@@ -22,6 +22,7 @@ You are solely responsible for determining the appropriateness of using and dist
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <inttypes.h>
 #include <ctype.h>
 #include "rng.h"
 #include "api.h"
@@ -40,7 +41,7 @@ void	fprintBstr(FILE *fp, char *S, unsigned char *A, unsigned long long L);
 char    AlgName[] = "My Alg Name";
 
 int
-PQCgenKAT_sign_main()
+PQCgenKAT_sign_main(void)
 {
     char                fn_req[32], fn_rsp[32];
     FILE                *fp_req, *fp_rsp;
@@ -75,7 +76,7 @@ PQCgenKAT_sign_main()
         randombytes(seed, 48);
         fprintBstr(fp_req, "seed = ", seed, 48);
         mlen = 33*(i+1);
-        fprintf(fp_req, "mlen = %llu\n", mlen);
+        fprintf(fp_req, "mlen = %" PRIu64 "\n", (uint64_t)mlen);
         randombytes(msg, mlen);
         fprintBstr(fp_req, "msg = ", msg, mlen);
         fprintf(fp_req, "pk =\n");
@@ -93,9 +94,10 @@ PQCgenKAT_sign_main()
 
     fprintf(fp_rsp, "# %s\n\n", CRYPTO_ALGNAME);
     done = 0;
+	int ret = 0;
     do {
         if ( FindMarker(fp_req, "count = ") )
-            fscanf(fp_req, "%d", &count);
+            ret = fscanf(fp_req, "%" PRIi32, &count);
         else {
             done = 1;
             break;
@@ -111,12 +113,12 @@ PQCgenKAT_sign_main()
         randombytes_init(seed, NULL, 256);
 
         if ( FindMarker(fp_req, "mlen = ") )
-            fscanf(fp_req, "%llu", &mlen);
+            ret = fscanf(fp_req, "%" PRIu64, (uint64_t*)&mlen);
         else {
             printf("ERROR: unable to read 'mlen' from <%s>\n", fn_req);
             return KAT_DATA_ERROR;
         }
-        fprintf(fp_rsp, "mlen = %llu\n", mlen);
+        fprintf(fp_rsp, "mlen = %" PRIu64 "\n", (uint64_t)mlen);
 
         m = (unsigned char *)calloc(mlen, sizeof(unsigned char));
         m1 = (unsigned char *)calloc(mlen+CRYPTO_BYTES, sizeof(unsigned char));
@@ -140,7 +142,7 @@ PQCgenKAT_sign_main()
             printf("crypto_sign returned <%d>\n", ret_val);
             return KAT_CRYPTO_FAILURE;
         }
-        fprintf(fp_rsp, "smlen = %llu\n", smlen);
+        fprintf(fp_rsp, "smlen = %" PRIu64 "\n", (uint64_t)smlen);
         fprintBstr(fp_rsp, "sm = ", sm, smlen);
         fprintf(fp_rsp, "\n");
 
@@ -150,7 +152,7 @@ PQCgenKAT_sign_main()
         }
 
         if ( mlen != mlen1 ) {
-            printf("crypto_sign_open returned bad 'mlen': Got <%llu>, expected <%llu>\n", mlen1, mlen);
+            printf("crypto_sign_open returned bad 'mlen': Got <%" PRIu64 ">, expected <%"PRIu64">\n", (uint64_t)mlen1, (uint64_t)mlen);
             return KAT_CRYPTO_FAILURE;
         }
 
@@ -165,6 +167,7 @@ PQCgenKAT_sign_main()
 
     } while ( !done );
 
+	(void)ret;
     fclose(fp_req);
     fclose(fp_rsp);
 
@@ -275,10 +278,7 @@ fprintBstr(FILE *fp, char *S, unsigned char *A, unsigned long long L)
 }
 
 
-int main()
+int main(void)
 {
-
-/* Some parameter sets requires a stack larger than 8 MiB. */
-
     return PQCgenKAT_sign_main();
 }

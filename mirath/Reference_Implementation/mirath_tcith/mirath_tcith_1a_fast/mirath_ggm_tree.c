@@ -7,15 +7,7 @@
 #include <string.h>
 #include "mirath_ggm_tree.h"
 
-#include "rijndael/seed_expand_functions_ref.h"
-
-static inline void mirath_expand_seed(uint8_t pair_node[2][MIRATH_SECURITY_BYTES],
-                                      const uint8_t salt[MIRATH_PARAM_SALT_BYTES],
-                                      const uint32_t i,
-                                      const uint8_t seed[MIRATH_SECURITY_BYTES]) {
-    aes_128_expand_seed(pair_node, salt, i, seed);
-}
-
+#include "seed_expand_rijndael.h"
 
 /**
  * \fn static inline size_t mirath_ggm_tree_child_0(size_t i)
@@ -147,7 +139,7 @@ static size_t mirath_ggm_tree_remove_from_list(size_t arr[], size_t n, size_t po
  */
 void mirath_ggm_tree_expand(mirath_ggm_tree_t ggm_tree, const uint8_t salt[MIRATH_PARAM_SALT_BYTES]) {
     for (size_t i = 0; i < (MIRATH_PARAM_TREE_LEAVES - 1); i++) {
-        mirath_expand_seed(ggm_tree + mirath_ggm_tree_child_0(i), salt, i, ggm_tree[i]);
+        rijndael_expand_seed(ggm_tree + mirath_ggm_tree_child_0(i), salt, i, ggm_tree[i]);
     }
 }
 
@@ -247,7 +239,7 @@ int mirath_ggm_tree_partial_expand(mirath_ggm_tree_t partial_ggm_tree,
             }
         } else {
             if (valid[i]) {
-                mirath_expand_seed(partial_ggm_tree + mirath_ggm_tree_child_0(i), salt, i, partial_ggm_tree[i]);
+                rijndael_expand_seed(partial_ggm_tree + mirath_ggm_tree_child_0(i), salt, i, partial_ggm_tree[i]);
                 if (i < (MIRATH_PARAM_TREE_LEAVES / 2)) {
                     valid[mirath_ggm_tree_child_0(i)] = 1;
                     valid[mirath_ggm_tree_child_1(i)] = 1;

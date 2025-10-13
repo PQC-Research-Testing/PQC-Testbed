@@ -25,20 +25,7 @@ endif()
 set(REFERENCE_CODE_DIR ../../Reference_Implementation)
 set(OPTIMIZED_CODE_DIR ../../Optimized_Implementation)
 set(BENCHMARKING ../../../TestingCode/Benchmarkingcode.c)
-if(REFERENCE EQUAL 1)
-message("Compiling portable reference code")
-set(BASE_DIR ${REFERENCE_CODE_DIR})
-set(SPEC_HEADERS
-        ${BASE_DIR}/include/sha3.h
-        ${BASE_DIR}/include/csprng_hash.h
-        ${BASE_DIR}/include/restr_arith.h
-        ${BASE_DIR}/include/fp_arith.h )
-set(SPEC_SOURCES
-        ${BASE_DIR}/lib/merkle.c
-        ${BASE_DIR}/lib/seedtree.c
-        ${BASE_DIR}/lib/CROSS.c
-)
-else()
+
 message("Compiling optimized AVX2 code")
 set(BASE_DIR ${OPTIMIZED_CODE_DIR})
 set(SPEC_HEADERS
@@ -50,7 +37,8 @@ set(SPEC_HEADERS
         ${BASE_DIR}/include/csprng_hash.h
         ${BASE_DIR}/include/architecture_detect.h
         ${BASE_DIR}/include/restr_arith.h
-        ${BASE_DIR}/include/fp_arith.h )
+        ${BASE_DIR}/include/fp_arith.h
+        ${BASE_DIR}/include/rng.h )
 set(SPEC_SOURCES
         ${BASE_DIR}/lib/fips202x4.c
         ${BASE_DIR}/lib/KeccakP-1600-times4-SIMD256.c
@@ -58,7 +46,6 @@ set(SPEC_SOURCES
         ${BASE_DIR}/lib/seedtree.c
         ${BASE_DIR}/lib/CROSS.c
 )
-endif()
 
 set(COMMON_DIR ${REFERENCE_CODE_DIR})
 set(HEADERS

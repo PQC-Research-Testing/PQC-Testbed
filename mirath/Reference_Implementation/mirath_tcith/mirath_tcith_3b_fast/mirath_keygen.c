@@ -1,11 +1,8 @@
 #include <stdint.h>
 
-#include "prng.h"
-#include "random.h"
 #include "mirath_matrix_ff.h"
+#include "random.h"
 #include "mirath_parsing.h"
-#include "mirath_tcith.h"
-
 
 int mirath_keygen(uint8_t *pk, uint8_t *sk) {
     seed_t seed_sk;

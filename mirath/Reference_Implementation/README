@@ -56,27 +56,34 @@ This archive is organized as follows:
 1. SUBMISSION OVERVIEW
 ----------------------
 
-Both reference implementation and optimized implementations provide the twelve
-parameter sets as detailed in the Algorithm Specifications from the Supporting
-Documentation: Mirath-XY-Z where
+Both the reference implementation and the optimized implementations provide twelve
+parameter sets, as specified in the Algorithm Specifications from the Supporting
+Documentation. These parameter sets are denoted as Mirath-XY-Z, where:
 
-- Security Level: X = 1, 3, or 5
-- Choices of q: Y = a or b
-- Fast or Short: Z = F or S
+- Security Level (X): 1, 3, or 5
+- Choice of q (Y): a or b
+- Variant (Z): Fast or Short
 
-The parameter Y=a refers to q=16, while Y=b to q=2.
+The parameter Y = a corresponds to q = 16, while Y = b corresponds to q = 2.
 
 2. INSTALLATION INSTRUCTIONS
 ----------------------------
 
-The following pieces of software and libraries are required: gcc and openssl.
+The following software and libraries are required: gcc, cmake, and openssl.
 
-Mirath-XY-Z can be compiled in two different ways:
+Mirath-XY-Z can be compiled in two ways:
 
-- Execute make mirath_XY_Z to compile a working example of the scheme.
-  Run ./mirath_XY_Z to execute the scheme.
-- Execute make PQCgenKAT_sign to compile the NIST KAT generator.
-  Run ./PQCgenKAT_sign to generate KAT files.
+- Compile the reference or optimized implementation
+  - Using the Rijndael-based commit:
+    cmake -DOPT_COMMIT=rijndael -B build
+  - Using the SHA3-based commit:
+    cmake -DOPT_COMMIT=sha3 -B build
+  Then build with:
+    cmake --build build
+- Run example.
+  ./mirath_tcith_XY_Z to execute the scheme.
+- Run the NIST KAT generator.
+  ./PQCgenKAT_sign to generate KAT files.
 
 3. DOCUMENTATION GENERATION
 ---------------------------

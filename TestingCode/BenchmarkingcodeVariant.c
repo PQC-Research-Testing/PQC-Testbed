@@ -55,8 +55,6 @@ main(void)
             fprintf(file, "Keygen CC,Keygen Time (Microseconds), Signature CC,Signature Time (Microseconds),Verification CC,Verification Time (Microseconds),PEAK RSS (KB)\n");
         }
     }
-    //print statements used to ensure data being gathered. To be removed and replaced with logging in a file.
-    //focus on getting everything working first. 
     printf("Bench with %s\n", CRYPTO_ALGNAME);
     gettimeofday(&st, NULL);
     before = GetCC();
@@ -66,7 +64,7 @@ main(void)
     gettimeofday(&et, NULL);
     if(res!=0){
     printf("Error during key-generation operation detected.");
-   }
+    }
     timeElapsed = ((et.tv_sec - st.tv_sec)*1000000) + (et.tv_usec - st.tv_usec);
     printf("Cycles: %.2f Megacycles\n",(double)(after-before)/1000000);
     printf("Time elapsed: %lu microseconds\n", timeElapsed);

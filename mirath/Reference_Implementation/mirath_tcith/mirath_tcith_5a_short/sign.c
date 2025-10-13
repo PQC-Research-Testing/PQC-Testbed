@@ -68,7 +68,7 @@ int crypto_sign_open(unsigned char *msg, unsigned long long *mlen, const unsigne
 
     *mlen = smlen - CRYPTO_BYTES;
 
-    if (mirath_verify((uint8_t*)sig_msg + CRYPTO_BYTES, (size_t*)mlen, (uint8_t*)sig_msg, (uint8_t*)pk) != EXIT_SUCCESS) {
+    if (mirath_verify((uint8_t*)sig_msg + CRYPTO_BYTES, *mlen, (uint8_t*)sig_msg, (uint8_t*)pk) != EXIT_SUCCESS) {
         goto badsig;
     } else {
         /* All good, copy msg, return 0 */

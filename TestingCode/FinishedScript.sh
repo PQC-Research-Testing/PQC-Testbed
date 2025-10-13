@@ -6,7 +6,7 @@
 #EXECUTE SCRIPT WITH SUDO TO ALLOW FOR PROPER EXECUTION
 
 mkdir Data #Creates directory for storing performance data
-ulimit -s 15360 #Expands stack memory space for MIRATH short variants.
+ulimit -s 16000 #Expands stack memory space for MIRATH short variants.
 
 #Dilithium Implementation
 make -f Dilithium2AESmake bench-dilithium
@@ -409,117 +409,121 @@ mv faest_em_256s Data
 make -f FAESTem256smake clean
 
 #MIRATH Implementation
-
-make -f MIRATH1AF bench_mirath
+cd ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1a_fast
+mkdir build 
+cd build
+cmake ../CMakeLists.txt
+make
 for ((i=0; i<1; i++))
 do
-    ./bench_mirath
+    ./bench-mirath-1a-fast
 done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH1AF
-make -f MIRATH1AF clean
+cd ../../../../../TestingCode
+sudo mv ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1a_fast/build/Mirath Data
+mv Data/Mirath Data/Mirath-1a-Fast
+rm -r ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1a_fast/build
 
-make -f MIRATH1AS bench_mirath
+cd ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1a_short
+mkdir build 
+cd build
+cmake ../CMakeLists.txt
+make
 for ((i=0; i<1; i++))
 do
-    ./bench_mirath
+    ./bench-mirath-1a-short
 done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH1AS
-make -f MIRATH1AS clean
+cd ../../../../../TestingCode
+sudo mv ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1a_short/build/Mirath Data
+mv Data/Mirath Data/Mirath-1a-Short
+rm -r ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1a_short/build
 
-make -f MIRATH1BF bench_mirath
+cd ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1b_fast
+mkdir build 
+cd build
+cmake ../CMakeLists.txt
+make
 for ((i=0; i<1; i++))
 do
-    ./bench_mirath
+    ./bench-mirath-1b-fast
 done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH1BF
-make -f MIRATH1BF clean
+cd ../../../../../TestingCode
+sudo mv ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1b_fast/build/Mirath Data
+mv Data/Mirath Data/Mirath-1b-Fast
+rm -r ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1b_fast/build
 
-make -f MIRATH1BS bench_mirath
+
+
+cd ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1b_short
+mkdir build 
+cd build
+cmake ../CMakeLists.txt
+make
 for ((i=0; i<1; i++))
 do
-    ./bench_mirath
+    ./bench-mirath-1b-short
 done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH1BS
-make -f MIRATH1BS clean
+cd ../../../../../TestingCode
+sudo mv ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1b_short/build/Mirath Data
+mv Data/Mirath Data/Mirath-1b-Short
+rm -r ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_1b_short/build
 
-make -f MIRATH3AF bench_mirath
+cd ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5a_fast
+mkdir build 
+cd build
+cmake ../CMakeLists.txt
+make
 for ((i=0; i<1; i++))
 do
-    ./bench_mirath
+    ./bench-mirath-5a-fast
 done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH3AF
-make -f MIRATH3AF clean
+cd ../../../../../TestingCode
+sudo mv ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5a_fast/build/Mirath Data
+mv Data/Mirath Data/Mirath-5a-Fast
+rm -r ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5a_fast/build
 
-make -f MIRATH3AS bench_mirath
+cd ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5a_short
+mkdir build 
+cd build
+cmake ../CMakeLists.txt
+make
 for ((i=0; i<1; i++))
 do
-    ./bench_mirath
+    ./bench-mirath-5a-short
 done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH3AS
-make -f MIRATH3AS clean
+cd ../../../../../TestingCode
+sudo mv ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5a_short/build/Mirath Data
+mv Data/Mirath Data/Mirath-5a-Short
+rm -r ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5a_short/build
 
-make -f MIRATH3BF bench_mirath
+cd ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5b_fast
+mkdir build 
+cd build
+cmake ../CMakeLists.txt
+make
 for ((i=0; i<1; i++))
 do
-    ./bench_mirath
+    ./bench-mirath-5b-fast
 done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH3BF
-make -f MIRATH3BF clean
+cd ../../../../../TestingCode
+sudo mv ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5b_fast/build/Mirath Data
+mv Data/Mirath Data/Mirath-5b-Fast
+rm -r ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5b_fast/build
 
 
-make -f MIRATH3BS bench_mirath
+
+cd ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5b_short
+mkdir build 
+cd build
+cmake ../CMakeLists.txt
+make
 for ((i=0; i<1; i++))
 do
-    ./bench_mirath
+    ./bench-mirath-5b-short
 done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH3BS
-make -f MIRATH3BS clean
-
-make -f MIRATH5AF bench_mirath
-for ((i=0; i<1; i++))
-do
-    ./bench_mirath
-done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH5AF
-make -f MIRATH5AF clean
-
-make -f MIRATH5AS bench_mirath
-for ((i=0; i<1; i++))
-do
-    ./bench_mirath
-done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH5AS
-make -f MIRATH5AS clean
-
-
-make -f MIRATH5BF bench_mirath
-for ((i=0; i<1; i++))
-do
-    ./bench_mirath
-done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH5BF
-make -f MIRATH5BF clean
-
-make -f MIRATH5BS bench_mirath
-for ((i=0; i<1; i++))
-do
-    ./bench_mirath
-done
-mv Mirath Data
-mv ./Data/Mirath ./Data/MIRATH5BS
-make -f MIRATH5BS clean
-
+cd ../../../../../TestingCode
+sudo mv ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5b_short/build/Mirath Data
+mv Data/Mirath Data/Mirath-5b-Short
+rm -r ../mirath/Optimized_Implementation/mirath_tcith/mirath_tcith_5b_short/build
 #MQOM2 Implementations
 
 make -f MQOMC1gf2Fr3make mqom-bench
@@ -717,174 +721,49 @@ mv  MQOM2-L5-gf256-short-r3 Data
 make -f MQOMC5gf256Sr3make clean
 
 #PERK Variants
-make -f PERK128F3make perk-bench
+make -f PERK1F perk-bench
 cd ..
-cd perk/Optimized_Implementation/perk-128-fast-3
+cd perk/Optimized_Implementation/keccak_keccak/perk-1-fast
 for ((i=0; i<1; i++))
 do
-    ./build/bin/perk-128-fast-3-bench
+    ./build/bin/perk-1f-bench
 done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-128-fast-3/PERK Data
-mv Data/PERK Data/PERK128F3
-make -f PERK128F3make clean
+sudo mv perk-1-fast ../../../../TestingCode/Data
+rm -r build
+cd ../../../../TestingCode
 
-make -f PERK128F5make perk-bench
+make -f PERK1S perk-bench
 cd ..
-cd perk/Optimized_Implementation/perk-128-fast-5
+cd perk/Optimized_Implementation/keccak_keccak/perk-1-short
 for ((i=0; i<1; i++))
 do
-    ./build/bin/perk-128-fast-5-bench
+    ./build/bin/perk-1s-bench
 done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-128-fast-5/PERK Data
-mv Data/PERK Data/PERK128F5
-make -f PERK128F5make clean
+sudo mv perk-1-short ../../../../TestingCode/Data
+rm -r build
+cd ../../../../TestingCode
 
-make -f PERK192F3make perk-bench
+make -f PERK5F perk-bench
 cd ..
-cd perk/Optimized_Implementation/perk-192-fast-3
+cd perk/Optimized_Implementation/keccak_keccak/perk-5-fast
 for ((i=0; i<1; i++))
 do
-    ./build/bin/perk-192-fast-3-bench
+    ./build/bin/perk-5f-bench
 done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-192-fast-3/PERK Data
-mv Data/PERK Data/PERK192F3
-make -f PERK192F5make clean
+sudo mv perk-5-fast ../../../../TestingCode/Data
+rm -r build
+cd ../../../../TestingCode
 
-make -f PERK192F5make perk-bench
+make -f PERK5S perk-bench
 cd ..
-cd perk/Optimized_Implementation/perk-192-fast-5
+cd perk/Optimized_Implementation/keccak_keccak/perk-5-short
 for ((i=0; i<1; i++))
 do
-    ./build/bin/perk-192-fast-5-bench
+    ./build/bin/perk-5s-bench
 done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-192-fast-5/PERK Data
-mv Data/PERK Data/PERK192F5
-make -f PERK192F5make clean
-
-make -f PERK256F5make perk-bench
-cd ..
-cd perk/Optimized_Implementation/perk-256-fast-5
-for ((i=0; i<1; i++))
-do
-    ./build/bin/perk-256-fast-5-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-256-fast-5/PERK Data
-mv Data/PERK Data/PERK256F5
-make -f PERK256F5make clean
-
-make -f PERK256F3make perk-bench
-cd ..
-cd perk/Optimized_Implementation/perk-256-fast-3
-for ((i=0; i<1; i++))
-do
-    ./build/bin/perk-256-fast-3-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-256-fast-3/PERK Data
-mv Data/PERK Data/PERK256F3
-make -f PERK256F3make clean
-
-make -f PERK256S3make perk-bench
-cd ..
-cd perk/Optimized_Implementation/perk-256-short-3
-for ((i=0; i<1; i++))
-do
-    ./build/bin/perk-256-short-3-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-256-short-3/PERK Data
-mv Data/PERK Data/PERK256S3
-make -f PERK256S3make clean
-
-make -f PERK256S5make perk-bench
-cd ..
-cd perk/Optimized_Implementation/perk-256-short-5
-for ((i=0; i<1; i++))
-do
-    ./build/bin/perk-256-short-5-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-256-short-5/PERK Data
-mv Data/PERK Data/PERK256S5
-make -f PERK256S5make clean
-
-make -f PERK192S5make perk-bench
-cd ..
-cd perk/Optimized_Implementation/perk-192-short-5
-for ((i=0; i<1; i++))
-do
-    ./build/bin/perk-192-short-5-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-192-short-5/PERK Data
-mv Data/PERK Data/PERK192S5
-make -f PERK192S5make clean
-
-make -f PERK192S3make perk-bench
-cd ..
-cd perk/Optimized_Implementation/perk-192-short-3
-for ((i=0; i<1; i++))
-do
-    ./build/bin/perk-192-short-3-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-192-short-3/PERK Data
-mv Data/PERK Data/PERK192S3
-make -f PERK192S3make clean
-
-make -f PERK128S3make perk-bench
-cd ..
-cd perk/Optimized_Implementation/perk-128-short-3
-for ((i=0; i<1; i++))
-do
-    ./build/bin/perk-128-short-3-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-128-short-3/PERK Data
-mv Data/PERK Data/PERK128S3
-make -f PERK128S3make clean
-
-make -f PERK128S5make perk-bench
-cd ..
-cd perk/Optimized_Implementation/perk-128-short-5
-for ((i=0; i<1; i++))
-do
-    ./build/bin/perk-128-short-5-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../perk/Optimized_Implementation/perk-128-short-5/PERK Data
-mv Data/PERK Data/PERK128S5
-make -f PERK128S5make clean
-
+sudo mv perk-5-short ../../../../TestingCode/Data
+rm -r build
+cd ../../../../TestingCode
 #QRUOV Variants
 
 d ../QRUOV/Optimized_Implementation/
@@ -1092,77 +971,61 @@ make clean
 cd ../../TestingCode
 
 #RYDE Variants
-make -f RYDE1Fmake ryde1f-bench
-cd ..
-cd ryde/Optimized_Implementation/ryde1f
+cd ../ryde/Optimized_Implementation/ryde1f
+rm -rf build
+cmake -DCMAKE_BUILD_TYPE=Release -DOPT_IMPL=avx -B build
+cmake --build build
+cd build/bench
 for ((i=0; i<1; i++))
 do
-    ./bin/ryde1f-bench
+    ./bench-ryde-1f
 done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../ryde/Optimized_Implementation/ryde1f/RYDE-1F Data
+sudo mv RYDE-1F ../../../../../TestingCode/Data
+cd ../..
+rm -r build
+cd ../../../TestingCode
 
-make -f RYDE1Smake ryde1s-bench
-cd ..
-cd ryde/Optimized_Implementation/ryde1s
+cd ../ryde/Optimized_Implementation/ryde1s
+rm -rf build
+cmake -DCMAKE_BUILD_TYPE=Release -DOPT_IMPL=avx -B build
+cmake --build build
+cd build/bench
 for ((i=0; i<1; i++))
 do
-    ./bin/ryde1s-bench
+    ./bench-ryde-1s
 done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../ryde/Optimized_Implementation/ryde1s/RYDE-1S Data
+sudo mv RYDE-1S ../../../../../TestingCode/Data
+cd ../..
+rm -r build
+cd ../../../TestingCode
 
-make -f RYDE3Fmake ryde3f-bench
-cd ..
-cd ryde/Optimized_Implementation/ryde3f
+cd ../ryde/Optimized_Implementation/ryde5f
+rm -rf build
+cmake -DCMAKE_BUILD_TYPE=Release -DOPT_IMPL=avx -B build
+cmake --build build
+cd build/bench
 for ((i=0; i<1; i++))
 do
-    ./bin/ryde3f-bench
+    ./bench-ryde-5f
 done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../ryde/Optimized_Implementation/ryde3f/RYDE-3F Data
+sudo mv RYDE-5F ../../../../../TestingCode/Data
+cd ../..
+rm -r build
+cd ../../../TestingCode
 
-make -f RYDE3Smake ryde3s-bench
-cd ..
-cd ryde/Optimized_Implementation/ryde3s
+cd ../ryde/Optimized_Implementation/ryde5s
+rm -rf build
+cmake -DCMAKE_BUILD_TYPE=Release -DOPT_IMPL=avx -B build
+cmake --build build
+cd build/bench
 for ((i=0; i<1; i++))
 do
-    ./bin/ryde3s-bench
+    ./bench-ryde-5s
 done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../ryde/Optimized_Implementation/ryde3s/RYDE-3S Data
-
-make -f RYDE5Fmake ryde5f-bench
-cd ..
-cd ryde/Optimized_Implementation/ryde5f
-for ((i=0; i<1; i++))
-do
-    ./bin/ryde5f-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../ryde/Optimized_Implementation/ryde5f/RYDE-5F Data
-
-make -f RYDE5Smake ryde5s-bench
-cd ..
-cd ryde/Optimized_Implementation/ryde5s
-for ((i=0; i<1; i++))
-do
-    ./bin/ryde5s-bench
-done
-make clean
-cd ../../..
-cd TestingCode/
-sudo mv ../ryde/Optimized_Implementation/ryde5s/RYDE-5S Data
+sudo mv RYDE-5S ../../../../../TestingCode/Data
+cd ../..
+rm -r build
+cd ../../../TestingCode
 
 #SNOVA variants
 cd ..

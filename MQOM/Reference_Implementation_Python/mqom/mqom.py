@@ -1,8 +1,7 @@
-from .parsing import serialize, ByteStrFrmt, VectorFrmt, MatrixFrmt, ArrayFrmt
-from .utils import Array, Arrays
+from .parsing import parse, serialize, ByteStrFrmt, VectorFrmt, MatrixFrmt, ArrayFrmt
+from .utils import Array, Arrays, MultiDimArray
 from .bits import map_to_bits, truncate_bits_and_pad, bytestring_to_bitstring, bitstring_to_integer
 from math import ceil
-from numpy import matmul
 
 class MQOM2:
     def __init__(self, params, random_bytes):
@@ -14,7 +13,7 @@ class MQOM2:
         ### Define all the data format we use in the scheme
         # Format of the unitary data
         mq_solution_format = VectorFrmt(par.base_field, par.n) # x
-        mq_output_format = VectorFrmt(par.base_field, par.m) # y
+        mq_output_format = VectorFrmt(par.extension_field, par.m_hat) # y
         mseed_eq_format = ByteStrFrmt(2*par.lda) # mseed_eq
         digest_format = ByteStrFrmt(2*par.lda)
         salt_format = ByteStrFrmt(par.lda)
@@ -53,36 +52,13 @@ class MQOM2:
     def piop(self):
         return self.params.piop
     
+    @property
+    def mq_eqns(self):
+        return self.params.mq_eqns
+    
     ########################################
     #####        KEY GENERATION        #####
     ########################################
-
-    def _expand_equations(self, mseed_eq):
-        par = self.params
-        nc = [(j+1)*par.log2q for j in range(par.n)]
-        #nz = [(par.n-(j+1))*par.log2q for j in range(par.n)]
-        nb = [ceil(nc[j]/8) for j in range(par.n)]
-        nb_eq = nb[par.n-1] + sum(nb)
-
-        seed_eq, A, b = Arrays(3, par.m)
-        for i in range(par.m):
-            # Expand equation's seed
-            seed_eq[i] = par.xof((b'\x01', mseed_eq, map_to_bits(i, 2)), len=par.lda)
-            stream = par.prg(b'\x00'*par.lda, 0, seed_eq[i], nb_eq)
-
-            # Parse the pseudorandom bytestring
-            k = 0
-            matrix_bytes = b''
-            for j in range(par.n):
-                # Add zero bits to complete each row
-                partial_row_bytes = stream[k:k+nb[j]]
-                row_bytes = truncate_bits_and_pad(partial_row_bytes, nc[j], par.n*par.log2q)
-                matrix_bytes += row_bytes
-                k += nb[j]
-            A[i] = MatrixFrmt(par.base_field, par.n, par.n).parse(matrix_bytes)
-            b[i] = VectorFrmt(par.base_field, par.n).parse(stream[k:])
-
-        return (A, b)
 
     def generate_keys(self, seed_key=None):
         """ MQOM2 -- Key Generation """
@@ -96,10 +72,8 @@ class MQOM2:
         )
 
         # Expand the MQ instance
-        (A, b) = self._expand_equations(mseed_eq)
-        y = Array(par.m)
-        for i in range(par.m):
-            y[i] = matmul(x, matmul(A[i], x)) + matmul(b[i], x)
+        (A, b) = self.mq_eqns.expand_equations(mseed_eq)
+        y = self.mq_eqns.compute_y(x, A, b)
 
         # Serialize and define keys
         pk = serialize(mseed_eq, y)
@@ -153,8 +127,7 @@ class MQOM2:
 
         # Key Parsing & Expansion
         pk, x = self.sk_format.parse(sk)
-        mseed_eq, y = self.pk_format.parse(pk)
-        (A, b) = self._expand_equations(mseed_eq)
+        mseed_eq, _ = self.pk_format.parse(pk)
 
         # Initialization
         mseed = mseed or self.random_bytes(par.lda)
@@ -165,7 +138,7 @@ class MQOM2:
         (com1, key, x0, u0, u1) = self.blc.commit(mseed, salt, x)
 
         # PIOP Protocol: Compute Alpha Line
-        (alpha0, alpha1) = self.piop.compute_alpha_lines(com1, x, x0, u0, u1, A, b)
+        (alpha0, alpha1) = self.piop.compute_alpha_lines(com1, x, x0, u0, u1, mseed_eq)
         
         # PIOP Queries & Opening
         com2 = par.xof(b'\x03', serialize(alpha0, alpha1), len=2*par.lda)
@@ -187,7 +160,6 @@ class MQOM2:
         """ MQOM2 -- Verification Algorithm """
         par = self.params
         mseed_eq, y = self.pk_format.parse(pk)
-        (A, b) = self._expand_equations(mseed_eq)
         (salt, com1, com2, alpha1, opening, nonce_bytes) = self.sig_format.parse(sig)
         msg_hash = par.xof(b'\x02', msg, len=2*par.lda)
 
@@ -200,7 +172,7 @@ class MQOM2:
         if ret is not True:
             return False
         
-        alpha0 = self.piop.recompute_alpha_lines(com1, alpha1, i_star, x_eval, u_eval, A, b, y)
+        alpha0 = self.piop.recompute_alpha_lines(com1, alpha1, i_star, x_eval, u_eval,mseed_eq, y)
         com2_ = par.xof(b'\x03', serialize(alpha0, alpha1), len=2*par.lda)
         if com2_ != com2:
             return False

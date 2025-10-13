@@ -12,13 +12,12 @@
 
 #define MIRATH_LEAVES_SEEDS_OFFSET (MIRATH_PARAM_TREE_LEAVES - 1)
 
-// No control on the path length for random instances, but experiments suggest 2 * MIRATH_PARAM_T_OPEN as upper bound
-#define MIRATH_PARAM_MAX_OPEN (2 * MIRATH_PARAM_T_OPEN)
+// No control on the path length for random instances, but experiments suggest 3 * MIRATH_PARAM_T_OPEN as upper bound
+#define MIRATH_PARAM_MAX_OPEN (3 * MIRATH_PARAM_T_OPEN)
 
 #if (MIRATH_PARAM_TREE_LEAVES > 0xFFFFFFFF)
 #error MIRATH_PARAM_TREE_LEAVES must fit in uint32_t
 #endif
-
 
 typedef uint8_t mirath_ggm_tree_node_t[MIRATH_SECURITY_BYTES];
 typedef mirath_ggm_tree_node_t mirath_ggm_tree_t[2 * MIRATH_PARAM_TREE_LEAVES - 1] __attribute__((aligned(16)));

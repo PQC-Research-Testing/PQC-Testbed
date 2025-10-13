@@ -1,5 +1,5 @@
 CC = gcc
-LOCALE = ../HAWK/Optimized_Implementation/avx2/hawk512
+LOCALE = ../HAWK/Optimized-512
 CFLAGS = -Wall -Wextra -Wshadow -Wundef -O2 -I$(LOCALE)
 LD = $(CC)
 LDFLAGS =

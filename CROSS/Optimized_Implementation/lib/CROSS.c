@@ -2,7 +2,7 @@
  *
  * Reference ISO-C11 Implementation of CROSS.
  *
- * @version 2.0 (February 2025)
+ * @version 2.2 (July 2025)
  *
  * Authors listed in alphabetical order:
  * 
@@ -34,6 +34,7 @@
 
 #include "architecture_detect.h"
 #include "CROSS.h"
+#include "rng.h"
 #include "csprng_hash.h"
 #include "fp_arith.h"
 #include "merkle_tree.h"

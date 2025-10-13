@@ -8,6 +8,7 @@ LABEL_CAT = {
 
 LABEL_FIELD = {
     2:   'gf2',
+    16:  'gf16',
     256: 'gf256',
 }
 
@@ -17,8 +18,8 @@ LABEL_TRADEOFF = {
 }
 
 LABEL_VARIANT = {
-    Variant.R5: 'R5',
-    Variant.R3: 'R3',
+    Variant.R5: 'r5',
+    Variant.R3: 'r3',
 }
 
 def gey_key_of(d, searched_value):
